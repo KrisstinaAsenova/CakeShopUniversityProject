@@ -24,6 +24,10 @@
                     <div>
                         <a asp-action="Details" asp-route-CakeId="@cake.CakeId">Details</a>
                     </div>
+                    <p class="button">
+                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                           asp-route-CakeId="@cake.CakeId">Add to cart</a>
+                    </p>
                 </div>
                 
             </div>
