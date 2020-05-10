@@ -12,12 +12,12 @@ namespace _101Shop.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly IPieRepository _pieRepository;
+        private readonly ICakeRepository _cakeRepository;
         private readonly ShoppingCart _shoppingCart;
 
-        public ShoppingCartController(IPieRepository pieRepository, ShoppingCart shoppingCart)
+        public ShoppingCartController(ICakeRepository cakeRepository, ShoppingCart shoppingCart)
         {
-            _pieRepository = pieRepository;
+            _cakeRepository = cakeRepository;
             _shoppingCart = shoppingCart;
         }
 
@@ -35,24 +35,24 @@ namespace _101Shop.Controllers
             return View(shoppingCartViewModel);
         }
 
-        public RedirectToActionResult AddToShoppingCart(int pieId)
+        public RedirectToActionResult AddToShoppingCart(int cakeId)
         {
-            var selectedPie = _pieRepository.Pies.FirstOrDefault(p => p.PieId == pieId);
+            var selectedcake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
 
-            if (selectedPie != null)
+            if (selectedcake != null)
             {
-                _shoppingCart.AddToCart(selectedPie, 1);
+                _shoppingCart.AddToCart(selectedcake, 1);
             }
             return RedirectToAction("Index");
         }
 
-        public RedirectToActionResult RemoveFromShoppingCart(int pieId)
+        public RedirectToActionResult RemoveFromShoppingCart(int cakeId)
         {
-            var selectedPie = _pieRepository.Pies.FirstOrDefault(p => p.PieId == pieId);
+            var selectedcake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
 
-            if (selectedPie != null)
+            if (selectedcake != null)
             {
-                _shoppingCart.RemoveFromCart(selectedPie);
+                _shoppingCart.RemoveFromCart(selectedcake);
             }
             return RedirectToAction("Index");
         }

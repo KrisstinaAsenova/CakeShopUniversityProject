@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using _101Shop.Models;
-//using BethanysPieShop.Models;
+//using BethanyscakeShop.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace _101Shop
@@ -44,7 +44,7 @@ namespace _101Shop
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddTransient<IPieRepository, PieRepository>();
+            services.AddTransient<ICakeRepository, CakeRepository>();
             // All service that depends on DbContext should have Scoped life time.
             //services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -90,8 +90,8 @@ namespace _101Shop
 
                 //endpoints.MapControllerRoute(
                 //  name: "categoryfilter",
-                //  pattern: "Pie/{action}/{category?}",
-                //  defaults: new { Controller = "Pie", action = "List" });
+                //  pattern: "Cake/{action}/{category?}",
+                //  defaults: new { Controller = "Cake", action = "List" });
 
                 endpoints.MapControllerRoute(
                    name: "areas",

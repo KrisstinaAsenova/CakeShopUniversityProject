@@ -1,54 +1,65 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using _101Shop.Models;
-//using _101Shop.ViewModels;
-//using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using _101Shop.Models;
+using _101Shop.ViewModels;
 
-//namespace _101Shop.Controllers
-//{
-//    public class CakeController : Controller
-//    {
-//        private readonly IPieRepository _pieRepository;
+namespace _101Shop.Controllers
+{
+    public class CakeController : Controller
+    {
+        private readonly ICakeRepository _cakeRepository;
 
-//        public IActionResult Index()
-//        {
-//            return View();
-//        }
+        public CakeController(ICakeRepository cakeRepository)
+        {
+            _cakeRepository = cakeRepository;
+        }
 
-//        public IActionResult Detail()
-//        {
-//            return View();
-//        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-//        public CakeController(IPieRepository pieRepository)
-//        {
-//            _pieRepository = pieRepository;
-//        }
+        [HttpPost]
+        public IActionResult Create(CakeViewModel vm)
+        {
+            var model = _cakeRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price);
 
+            return RedirectToAction(nameof(Create));
+        }
 
-//        public IActionResult Details(int id)
-//        {
-//            var pie = _pieRepository.GetPieById(id);
-//            if (pie == null)
-//                return NotFound();
+        public IActionResult List()
+        {
+            var cakes = _cakeRepository.GetAllCakes();
+            var test = cakes.Select(cake => new CakeViewModel
+            {
+                CakeId = cake.CakeId,
+                Name = cake.Name,
+                ShortDescription = cake.ShortDescription,
+                LongDescription = cake.LongDescription,
+                Price = cake.Price,
+                InStock = cake.InStock,
+                ImageUrl = cake.ImageUrl
 
-//            return View(pie);
-//        }
+            });
+            return View(test);
+        }
 
-//        [HttpGet]
-//        public IActionResult Create()
-//        {
-//            return View();
-//        }
-
-//        [HttpPost]
-//        public IActionResult Create(PieViewModel vm)
-//        {
-//            var model = _pieRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price);
-
-//            return RedirectToAction(nameof(Create));
-//        }
-//    }
-//}
+        public IActionResult Details(int cakeId)
+        {
+            var cake = _cakeRepository.GetcakeById(cakeId);
+            var test = new CakeViewModel()
+            {
+                CakeId = cake.CakeId,
+                Name = cake.Name,
+                ShortDescription = cake.ShortDescription,
+                LongDescription = cake.LongDescription,
+                Price = cake.Price,
+            };
+            return View(test);
+        }
+    }
+}

@@ -32,18 +32,18 @@ namespace _101Shop.Models
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
-        public void AddToCart(Pie pie, int amount)
+        public void AddToCart(Cake cake, int amount)
         {
             var shoppingCartItem =
                     _appDbContext.ShoppingCartItems.SingleOrDefault(
-                        s => s.Pie.PieId == pie.PieId && s.ShoppingCartId == ShoppingCartId);
+                        s => s.Cake.CakeId == cake.CakeId && s.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem
                 {
                     ShoppingCartId = ShoppingCartId,
-                    Pie = pie,
+                    Cake = cake,
                     Amount = 1
                 };
 
@@ -56,11 +56,11 @@ namespace _101Shop.Models
             _appDbContext.SaveChanges();
         }
 
-        public int RemoveFromCart(Pie pie)
+        public int RemoveFromCart(Cake cake)
         {
             var shoppingCartItem =
                     _appDbContext.ShoppingCartItems.SingleOrDefault(
-                        s => s.Pie.PieId == pie.PieId && s.ShoppingCartId == ShoppingCartId);
+                        s => s.Cake.CakeId == cake.CakeId && s.ShoppingCartId == ShoppingCartId);
 
             var localAmount = 0;
 
@@ -87,7 +87,7 @@ namespace _101Shop.Models
             return ShoppingCartItems ??
                    (ShoppingCartItems =
                        _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                           .Include(s => s.Pie)
+                           .Include(s => s.Cake)
                            .ToList());
         }
 
@@ -107,7 +107,7 @@ namespace _101Shop.Models
         public decimal GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                .Select(c => c.Pie.Price * c.Amount).Sum();
+                .Select(c => c.Cake.Price * c.Amount).Sum();
             return total;
         }
     }

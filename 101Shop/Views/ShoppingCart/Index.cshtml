@@ -1,12 +1,12 @@
 ﻿@model ShoppingCartViewModel
 
 <h2>Your shopping cart</h2>
-<h4>Here are the delicious pies in your shopping cart.</h4>
+<h4>Here are the delicious cakes in your shopping cart.</h4>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Selected amount</th>
-            <th>Pie</th>
+            <th>Cake</th>
             <th class="text-right">Price</th>
             <th class="text-right">Subtotal</th>
         </tr>
@@ -16,10 +16,10 @@
         {
             <tr>
                 <td class="text-center">@line.Amount</td>
-                <td class="text-left">@line.Pie.Name</td>
-                <td class="text-right">@line.Pie.Price.ToString("c")</td>
+                <td class="text-left">@line.Cake.Name</td>
+                <td class="text-right">@line.Cake.Price.ToString("c")</td>
                 <td class="text-right">
-                    @((line.Amount * line.Pie.Price).ToString("c"))
+                    @((line.Amount * line.Cake.Price).ToString("c"))
                 </td>
             </tr>
         }

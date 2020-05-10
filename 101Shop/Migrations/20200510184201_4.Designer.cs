@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _101Shop.Models;
 
 namespace _101Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200510184201_4")]
+    partial class _4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,7 +158,7 @@ namespace _101Shop.Migrations
 
             modelBuilder.Entity("_101Shop.Models.Cake", b =>
                 {
-                    b.Property<int>("CakeId")
+                    b.Property<int>("cakeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -182,16 +184,15 @@ namespace _101Shop.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CakeId");
+                    b.HasKey("cakeId");
 
                     b.ToTable("Cakes");
 
                     b.HasData(
                         new
                         {
-                            CakeId = 1,
+                            cakeId = 1,
                             AllergyInformation = "nqma",
-                            ImageUrl = "/images/tikva.jpg",
                             InStock = true,
                             LongDescription = "Icing carrot cake mies.",
                             Name = "Apple Cake",
@@ -200,9 +201,8 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            CakeId = 2,
+                            cakeId = 2,
                             AllergyInformation = "ima",
-                            ImageUrl = "/images/shokolad.jpg",
                             InStock = true,
                             LongDescription = "Icing carrot e gummies.",
                             Name = "Blueberry Cheese Cake",
@@ -211,9 +211,8 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            CakeId = 3,
+                            cakeId = 3,
                             AllergyInformation = "..malko",
-                            ImageUrl = "/images/tikva.jpg",
                             InStock = true,
                             LongDescription = "Icinake dragée gummies.",
                             Name = "Cheese Cake",
@@ -222,9 +221,8 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            CakeId = 4,
+                            cakeId = 4,
                             AllergyInformation = "..maasdadlko",
-                            ImageUrl = "/images/shokolad.jpg",
                             InStock = true,
                             LongDescription = "Icinake dasdadragée gummies.",
                             Name = "Cheese Cake",
@@ -336,15 +334,15 @@ namespace _101Shop.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CakeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ShoppingCartId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("cakeId")
+                        .HasColumnType("int");
+
                     b.HasKey("ShoppingCartItemId");
 
-                    b.HasIndex("CakeId");
+                    b.HasIndex("cakeId");
 
                     b.ToTable("ShoppingCartItems");
                 });
@@ -421,11 +419,11 @@ namespace _101Shop.Migrations
                         {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "514da16f-1522-46e7-a069-eeaf6fd28220",
+                            ConcurrencyStamp = "0d885421-9f6b-49eb-ac76-ba39b157fd36",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "395a596b-3acd-4b5a-b4ed-e083407461c8",
+                            SecurityStamp = "eebc65f9-a927-484d-a427-140fc0d18456",
                             TwoFactorEnabled = false,
                             Type = "Admin"
                         });
@@ -501,7 +499,7 @@ namespace _101Shop.Migrations
                 {
                     b.HasOne("_101Shop.Models.Cake", "Cake")
                         .WithMany()
-                        .HasForeignKey("CakeId");
+                        .HasForeignKey("cakeId");
                 });
 #pragma warning restore 612, 618
         }

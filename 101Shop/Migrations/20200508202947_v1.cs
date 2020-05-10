@@ -71,10 +71,10 @@ namespace _101Shop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pies",
+                name: "cakes",
                 columns: table => new
                 {
-                    PieId = table.Column<int>(nullable: false)
+                    cakeId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     ShortDescription = table.Column<string>(nullable: true),
@@ -86,7 +86,7 @@ namespace _101Shop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pies", x => x.PieId);
+                    table.PrimaryKey("PK_cakes", x => x.cakeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,7 +202,7 @@ namespace _101Shop.Migrations
                     OrderDetailId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(nullable: false),
-                    PieId = table.Column<int>(nullable: false),
+                    cakeId = table.Column<int>(nullable: false),
                     Amount = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false)
                 },
@@ -216,10 +216,10 @@ namespace _101Shop.Migrations
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Pies_PieId",
-                        column: x => x.PieId,
-                        principalTable: "Pies",
-                        principalColumn: "PieId",
+                        name: "FK_OrderDetails_cakes_cakeId",
+                        column: x => x.cakeId,
+                        principalTable: "cakes",
+                        principalColumn: "cakeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -229,7 +229,7 @@ namespace _101Shop.Migrations
                 {
                     ShoppingCartItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PieId = table.Column<int>(nullable: true),
+                    cakeId = table.Column<int>(nullable: true),
                     Amount = table.Column<int>(nullable: false),
                     ShoppingCartId = table.Column<string>(nullable: true)
                 },
@@ -237,19 +237,19 @@ namespace _101Shop.Migrations
                 {
                     table.PrimaryKey("PK_ShoppingCartItems", x => x.ShoppingCartItemId);
                     table.ForeignKey(
-                        name: "FK_ShoppingCartItems_Pies_PieId",
-                        column: x => x.PieId,
-                        principalTable: "Pies",
-                        principalColumn: "PieId",
+                        name: "FK_ShoppingCartItems_cakes_cakeId",
+                        column: x => x.cakeId,
+                        principalTable: "cakes",
+                        principalColumn: "cakeId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
-                table: "Pies",
-                columns: new[] { "PieId", "AllergyInformation", "ImageUrl", "InStock", "LongDescription", "Name", "Price", "ShortDescription" },
+                table: "cakes",
+                columns: new[] { "cakeId", "AllergyInformation", "ImageUrl", "InStock", "LongDescription", "Name", "Price", "ShortDescription" },
                 values: new object[,]
                 {
-                    { 1, "nqma", null, true, "Icing carrot cake mies.", "Apple Pie", 12.95m, "Our famous apple pies!" },
+                    { 1, "nqma", null, true, "Icing carrot cake mies.", "Apple Cake", 12.95m, "Our famous apple cakes!" },
                     { 2, "ima", null, true, "Icing carrot e gummies.", "Blueberry Cheese Cake", 18.95m, "You'll love it!" },
                     { 3, "..malko", null, true, "Icinake dragée gummies.", "Cheese Cake", 18.95m, "Plain cheese cake. Plain pleasure." },
                     { 4, "..maasdadlko", null, true, "Icinake dasdadragée gummies.", "Cheese Cake", 28.95m, "Plain cheese cacasdasdke. Plain pleasure." }
@@ -300,14 +300,14 @@ namespace _101Shop.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_PieId",
+                name: "IX_OrderDetails_cakeId",
                 table: "OrderDetails",
-                column: "PieId");
+                column: "cakeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCartItems_PieId",
+                name: "IX_ShoppingCartItems_cakeId",
                 table: "ShoppingCartItems",
-                column: "PieId");
+                column: "cakeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -343,7 +343,7 @@ namespace _101Shop.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Pies");
+                name: "cakes");
         }
     }
 }

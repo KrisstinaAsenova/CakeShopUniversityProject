@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _101Shop.Models;
 
 namespace _101Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200510190745_v8")]
+    partial class v8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,7 +193,7 @@ namespace _101Shop.Migrations
                         {
                             CakeId = 1,
                             AllergyInformation = "nqma",
-                            ImageUrl = "/images/tikva.jpg",
+                            ImageUrl = "~/images/tikva.jpg",
                             InStock = true,
                             LongDescription = "Icing carrot cake mies.",
                             Name = "Apple Cake",
@@ -202,7 +204,7 @@ namespace _101Shop.Migrations
                         {
                             CakeId = 2,
                             AllergyInformation = "ima",
-                            ImageUrl = "/images/shokolad.jpg",
+                            ImageUrl = "images/shokolad.jpg",
                             InStock = true,
                             LongDescription = "Icing carrot e gummies.",
                             Name = "Blueberry Cheese Cake",
@@ -224,7 +226,7 @@ namespace _101Shop.Migrations
                         {
                             CakeId = 4,
                             AllergyInformation = "..maasdadlko",
-                            ImageUrl = "/images/shokolad.jpg",
+                            ImageUrl = "~/images/shokolad.jpg",
                             InStock = true,
                             LongDescription = "Icinake dasdadragée gummies.",
                             Name = "Cheese Cake",
@@ -421,11 +423,11 @@ namespace _101Shop.Migrations
                         {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "514da16f-1522-46e7-a069-eeaf6fd28220",
+                            ConcurrencyStamp = "6b422204-c12f-42e5-83e1-91a964b34bdb",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "395a596b-3acd-4b5a-b4ed-e083407461c8",
+                            SecurityStamp = "c93bf5b1-b230-4e7a-983b-b868c8c0c233",
                             TwoFactorEnabled = false,
                             Type = "Admin"
                         });

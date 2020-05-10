@@ -234,7 +234,7 @@ namespace _101Shop.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PieId")
+                    b.Property<int>("cakeId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -244,14 +244,14 @@ namespace _101Shop.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("PieId");
+                    b.HasIndex("cakeId");
 
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("_101Shop.Models.Pie", b =>
+            modelBuilder.Entity("_101Shop.Models.Cake", b =>
                 {
-                    b.Property<int>("PieId")
+                    b.Property<int>("cakeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -277,24 +277,24 @@ namespace _101Shop.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PieId");
+                    b.HasKey("cakeId");
 
-                    b.ToTable("Pies");
+                    b.ToTable("cakes");
 
                     b.HasData(
                         new
                         {
-                            PieId = 1,
+                            cakeId = 1,
                             AllergyInformation = "nqma",
                             InStock = true,
                             LongDescription = "Icing carrot cake mies.",
-                            Name = "Apple Pie",
+                            Name = "Apple Cake",
                             Price = 12.95m,
-                            ShortDescription = "Our famous apple pies!"
+                            ShortDescription = "Our famous apple cakes!"
                         },
                         new
                         {
-                            PieId = 2,
+                            cakeId = 2,
                             AllergyInformation = "ima",
                             InStock = true,
                             LongDescription = "Icing carrot e gummies.",
@@ -304,7 +304,7 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            PieId = 3,
+                            cakeId = 3,
                             AllergyInformation = "..malko",
                             InStock = true,
                             LongDescription = "Icinake dragée gummies.",
@@ -314,7 +314,7 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            PieId = 4,
+                            cakeId = 4,
                             AllergyInformation = "..maasdadlko",
                             InStock = true,
                             LongDescription = "Icinake dasdadragée gummies.",
@@ -334,7 +334,7 @@ namespace _101Shop.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PieId")
+                    b.Property<int?>("cakeId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShoppingCartId")
@@ -342,7 +342,7 @@ namespace _101Shop.Migrations
 
                     b.HasKey("ShoppingCartItemId");
 
-                    b.HasIndex("PieId");
+                    b.HasIndex("cakeId");
 
                     b.ToTable("ShoppingCartItems");
                 });
@@ -471,18 +471,18 @@ namespace _101Shop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("_101Shop.Models.Pie", "Pie")
+                    b.HasOne("_101Shop.Models.Cake", "Cake")
                         .WithMany()
-                        .HasForeignKey("PieId")
+                        .HasForeignKey("cakeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("_101Shop.Models.ShoppingCartItem", b =>
                 {
-                    b.HasOne("_101Shop.Models.Pie", "Pie")
+                    b.HasOne("_101Shop.Models.Cake", "Cake")
                         .WithMany()
-                        .HasForeignKey("PieId");
+                        .HasForeignKey("cakeId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PieViewModel>
+﻿@model IEnumerable<CakeViewModel>
 @{
     ViewData["Title"] = "AllCakes";
 }
@@ -8,21 +8,21 @@
 <h1>Нашите предложения!</h1>
 <br />
 <div class="row h-100">
-    @foreach (var pie in Model)
+    @foreach (var cake in Model)
     {
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 
             <div class="card h-100">
 
-                <img class="card-img-top" src="~/images/tikva.jpg" alt="Card image cap" height="220" width="145" />
+                <img class="card-img-top" src="@cake.ImageUrl" alt="Card image cap" height="220" width="145" />
                 <div class="card-body">
-                    <h5>@pie.Name</h5>
+                    <h5>@cake.Name</h5>
                     <h5 class="card-title" style="color:firebrick"></h5>
                     <p class="card-text" style="color:firebrick">
-                        Цена: @pie.Price
+                        Цена: @cake.Price
                     </p>
                     <div>
-                        <a asp-action="Details" asp-route-PieId="@pie.PieId">Details</a>
+                        <a asp-action="Details" asp-route-CakeId="@cake.CakeId">Details</a>
                     </div>
                 </div>
                 
@@ -53,23 +53,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var pie in Model)
+                        @foreach (var cake in Model)
                         {
                             <tr>
                                 <td>
-                                    @pie.Name
+                                    @cake.Name
                                 </td>
                                 <td>
-                                    @pie.ShortDescription
+                                    @cake.ShortDescription
                                 </td>
                                 <td>
-                                    @pie.Price
+                                    @cake.Price
                                 </td>
                                 <td>
-                                    @pie.InStock
+                                    @cake.InStock
                                 </td>
                                 <td>
-                                    <a asp-action="Details" asp-route-id="@pie.PieId">Details</a>
+                                    <a asp-action="Details" asp-route-id="@cake.cakeId">Details</a>
 
                                 </td>
                             </tr>
