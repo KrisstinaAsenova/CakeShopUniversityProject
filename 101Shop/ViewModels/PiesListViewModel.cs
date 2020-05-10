@@ -1,5 +1,4 @@
 ﻿using _101Shop.Models;
-using BethanysPieShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

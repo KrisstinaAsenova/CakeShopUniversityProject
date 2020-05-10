@@ -14,27 +14,29 @@ namespace _101Shop.Controllers
     public class PieDataController : Controller
     {
         private readonly IPieRepository _pieRepository;
+        private readonly AppDbContext _appDbContext;
 
-        public PieDataController(IPieRepository pieRepository)
+        public PieDataController(IPieRepository pieRepository, AppDbContext appDbContext)
         {
             _pieRepository = pieRepository;
+            _appDbContext = appDbContext;
         }
 
-        //[HttpGet]
-        //public IEnumerable<PieViewModel> LoadMorePies()
-        //{
-        //    IEnumerable<Pie> dbPies = null;
+        [HttpGet]
+        public IEnumerable<PieViewModel> LoadMorePies()
+        {
+            IEnumerable<Pie> dbPies = null;
 
-        //    dbPies = _pieRepository.Pies.OrderBy(p => p.PieId).Take(10);
+            dbPies = _pieRepository.Pies.OrderBy(p => p.PieId).Take(10);
 
-        //    List<PieViewModel> pies = new List<PieViewModel>();
+            List<PieViewModel> pies = new List<PieViewModel>();
 
-        //    foreach (var dbPie in dbPies)
-        //    {
-        //        pies.Add(MapDbPieToPieViewModel(dbPie));
-        //    }
-        //    return pies;
-        //}
+            foreach (var dbPie in dbPies)
+            {
+                pies.Add(MapDbPieToPieViewModel(dbPie));
+            }
+            return pies;
+        }
 
         private PieViewModel MapDbPieToPieViewModel(Pie dbPie)
         {
@@ -43,9 +45,9 @@ namespace _101Shop.Controllers
                 PieId = dbPie.PieId,
                 Name = dbPie.Name,
                 Price = dbPie.Price,
-                ShortDescription = dbPie.ShortDescription,
-                ImageThumbnailUrl = dbPie.ImageThumbnailUrl
+                ShortDescription = dbPie.ShortDescription
             };
         }
+        
     }
 }

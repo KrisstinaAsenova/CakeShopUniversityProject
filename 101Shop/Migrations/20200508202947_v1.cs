@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _101Shop.Migrations
 {
-    public partial class initial : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,20 +47,6 @@ namespace _101Shop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    CategoryId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -82,6 +68,25 @@ namespace _101Shop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pies",
+                columns: table => new
+                {
+                    PieId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    ShortDescription = table.Column<string>(nullable: true),
+                    LongDescription = table.Column<string>(nullable: true),
+                    AllergyInformation = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    InStock = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pies", x => x.PieId);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,35 +196,6 @@ namespace _101Shop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pies",
-                columns: table => new
-                {
-                    PieId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    ShortDescription = table.Column<string>(nullable: true),
-                    LongDescription = table.Column<string>(nullable: true),
-                    AllergyInformation = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    ImageThumbnailUrl = table.Column<string>(nullable: true),
-                    IsPieOfTheWeek = table.Column<bool>(nullable: false),
-                    InStock = table.Column<bool>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
-                    CategoryName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pies", x => x.PieId);
-                    table.ForeignKey(
-                        name: "FK_Pies_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderDetails",
                 columns: table => new
                 {
@@ -269,31 +245,14 @@ namespace _101Shop.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "CategoryId", "CategoryName", "Description" },
-                values: new object[,]
-                {
-                    { 114, "Fruit pies", "All-fruity pies" },
-                    { 112, "Cheese cakes", "Cheesy all the way" },
-                    { 113, "Seasonal pies", "Get in the mood for a seasonal pie" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Pies",
-                columns: new[] { "PieId", "AllergyInformation", "CategoryId", "CategoryName", "ImageThumbnailUrl", "ImageUrl", "InStock", "IsPieOfTheWeek", "LongDescription", "Name", "Price", "ShortDescription" },
+                columns: new[] { "PieId", "AllergyInformation", "ImageUrl", "InStock", "LongDescription", "Name", "Price", "ShortDescription" },
                 values: new object[,]
                 {
-                    { 1, "", 0, "Fruit pies", "https://gillcleerenpluralsight.blob.core.windows.net/files/applepiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/applepie.jpg", true, true, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow tofie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocgée gummies.", "Apple Pie", 12.95m, "Our famous apple pies!" },
-                    { 2, "", 0, "Cheese pie", "https://gillcleerenpluralsight.blob.core.windows.net/files/blueberrycheesecakesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/blueberrycheesecake.jpg", true, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallo cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danishe dragée gummies.", "Blueberry Cheese Cake", 18.95m, "You'll love it!" },
-                    { 3, "", 0, "Cheese pie", "https://gillcleerenpluralsight.blob.core.windows.net/files/cheesecakesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/cheesecake.jpg", true, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan molate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuie cupcake dragée gummies.", "Cheese Cake", 18.95m, "Plain cheese cake. Plain pleasure." },
-                    { 4, "", 0, "Cheese pie", "https://gillcleerenpluralsight.blob.core.windows.net/files/cherrypiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/cherrypie.jpg", true, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee bagée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolateummies.", "Cherry Pie", 15.95m, "A summer classic!" },
-                    { 5, "", 0, "Seasonal pies", "https://gillcleerenpluralsight.blob.core.windows.net/files/christmasapplepiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/christmasapplepie.jpg", true, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipahocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biownie cupcake dragée gummies.", "Christmas Apple Pie", 13.95m, "Happy holidays with this pie!" },
-                    { 6, "", 0, "Cheese pie", "https://gillcleerenpluralsight.blob.core.windows.net/files/cranberrypiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/cranberrypie.jpg", true, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow tokie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish choagée gummies.", "Cranberry Pie", 17.95m, "A Christmas favorite" },
-                    { 7, "", 0, "Cheese pie", "https://gillcleerenpluralsight.blob.core.windows.net/files/peachpiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/peachpie.jpg", false, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee browe brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate caies.", "Peach Pie", 15.95m, "Sweet as peach" },
-                    { 8, "", 0, "Seasonal pies", "https://gillcleerenpluralsight.blob.core.windows.net/files/pumpkinpiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/pumpkinpie.jpg", true, true, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow tokie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chragée gummies.", "Pumpkin Pie", 12.95m, "Our Halloween favorite" },
-                    { 9, "", 0, "Cheese pie", "https://gillcleerenpluralsight.blob.core.windows.net/files/rhubarbpiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/rhubarbpie.jpg", true, true, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffeedragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocola gummies.", "Rhubarb Pie", 15.95m, "My God, so sweet!" },
-                    { 10, "", 0, "Cheese pie", "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrypiesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrypie.jpg", true, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan malate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuie cupcake dragée gummies.", "Strawberry Pie", 15.95m, "Our delicious strawberry pie!" },
-                    { 11, "", 0, "Fruit pies", "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrycheesecakesmall.jpg", "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrycheesecake.jpg", false, false, "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmalar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit daniake dragée gummies.", "Strawberry Cheese Cake", 18.95m, "You'll love it!" }
+                    { 1, "nqma", null, true, "Icing carrot cake mies.", "Apple Pie", 12.95m, "Our famous apple pies!" },
+                    { 2, "ima", null, true, "Icing carrot e gummies.", "Blueberry Cheese Cake", 18.95m, "You'll love it!" },
+                    { 3, "..malko", null, true, "Icinake dragée gummies.", "Cheese Cake", 18.95m, "Plain cheese cake. Plain pleasure." },
+                    { 4, "..maasdadlko", null, true, "Icinake dasdadragée gummies.", "Cheese Cake", 28.95m, "Plain cheese cacasdasdke. Plain pleasure." }
                 });
 
             migrationBuilder.CreateIndex(
@@ -346,11 +305,6 @@ namespace _101Shop.Migrations
                 column: "PieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pies_CategoryId",
-                table: "Pies",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCartItems_PieId",
                 table: "ShoppingCartItems",
                 column: "PieId");
@@ -390,9 +344,6 @@ namespace _101Shop.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pies");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

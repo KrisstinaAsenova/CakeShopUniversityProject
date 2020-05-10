@@ -1,71 +1,82 @@
-﻿@*@model PiesListViewModel
-
-@ViewBag.CurrentCategory
-@foreach (var pie in Model.Pies)
-{
-    @Html.Partial("PieOverviewSummary", pie)
-}*@
-
-<div id="pieDiv">
-
-
-</div>
-
-@section scripts{
-
-    <script>
-
-        $(document).ready(function () {
-            LoadMorePies();
-        });
-
-        $(window).scroll(function () {
-            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                LoadMorePies();
-            }
-        });
-
-        function LoadMorePies() {
-
-            $.ajax({
-                type: 'GET',
-                url: '/api/PieData',
-                dataType: 'json',
-                success: function (jsonData) {
-                    if (jsonData == null) {
-                        alert('no data returned');
-                        return;
-                    }
-
-                    $.each(jsonData, function (index, pie) {
-
-                        var PieSummarString = '<div class="col-sm-4 col-lg-4 col-md-4"> ' +
-                                              '  <div class="thumbnail">' +
-                                              '     <img src="' + pie.imageThumbnailUrl + '" alt="">' +
-                                              '      <div class="caption">' +
-                                              '         <h3 class="pull-right">' + pie.price + '</h3>' +
-                                              '         <h3>' +
-                                              '             <a href=/Pie/Details/' + pie.pieId + '>' + pie.name + '</a>' +
-                                              '         </h3>' +
-                                              '         <p>' + pie.shortDescription + '</p>' +
-                                              '    </div>' +
-                                              '    <div class="addToCart">' +
-                                              '        <p class="button">' +
-                                              '             <a class="btn btn-primary" href=/ShoppingCart/AddToShoppingCart?pieId=' + pie.pieId + '>Add to cart</a>' +
-                                              '         </p>' +
-                                              '     </div>' +
-                                              '  </div>' +
-                                              '</div>';
-
-                        $('#pieDiv').append(PieSummarString);
-                    });
-                },
-                error: function (ex) {
-                    alert(ex);
-                }
-            });
-            return false;
-        }
-    </script>
-
+﻿@model IEnumerable<PieViewModel>
+@{
+    ViewData["Title"] = "AllCakes";
 }
+
+<link href="~/css/cbg.css" rel="stylesheet" type="text/css">
+
+<h1>Нашите предложения!</h1>
+<br />
+<div class="row h-100">
+    @foreach (var pie in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+
+            <div class="card h-100">
+
+                <img class="card-img-top" src="~/images/tikva.jpg" alt="Card image cap" height="220" width="145" />
+                <div class="card-body">
+                    <h5>@pie.Name</h5>
+                    <h5 class="card-title" style="color:firebrick"></h5>
+                    <p class="card-text" style="color:firebrick">
+                        Цена: @pie.Price
+                    </p>
+                    <div>
+                        <a asp-action="Details" asp-route-PieId="@pie.PieId">Details</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    }
+    </div>
+@*<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5 amber-text">
+                <h1 class="font-weight-light">Всички кексчета</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ShortDescription)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Price)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InStock)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pie in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @pie.Name
+                                </td>
+                                <td>
+                                    @pie.ShortDescription
+                                </td>
+                                <td>
+                                    @pie.Price
+                                </td>
+                                <td>
+                                    @pie.InStock
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@pie.PieId">Details</a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>*@
+

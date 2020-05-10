@@ -10,8 +10,8 @@ using _101Shop.Models;
 namespace _101Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200506175004_initial")]
-    partial class initial
+    [Migration("20200510170016_v2")]
+    partial class v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,44 +156,6 @@ namespace _101Shop.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("_101Shop.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 114,
-                            CategoryName = "Fruit pies",
-                            Description = "All-fruity pies"
-                        },
-                        new
-                        {
-                            CategoryId = 112,
-                            CategoryName = "Cheese cakes",
-                            Description = "Cheesy all the way"
-                        },
-                        new
-                        {
-                            CategoryId = 113,
-                            CategoryName = "Seasonal pies",
-                            Description = "Get in the mood for a seasonal pie"
-                        });
-                });
-
             modelBuilder.Entity("_101Shop.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -297,22 +259,10 @@ namespace _101Shop.Migrations
                     b.Property<string>("AllergyInformation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageThumbnailUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("InStock")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPieOfTheWeek")
                         .HasColumnType("bit");
 
                     b.Property<string>("LongDescription")
@@ -329,22 +279,15 @@ namespace _101Shop.Migrations
 
                     b.HasKey("PieId");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Pies");
 
                     b.HasData(
                         new
                         {
                             PieId = 1,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Fruit pies",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/applepiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/applepie.jpg",
+                            AllergyInformation = "nqma",
                             InStock = true,
-                            IsPieOfTheWeek = true,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow tofie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocgée gummies.",
+                            LongDescription = "Icing carrot cake mies.",
                             Name = "Apple Pie",
                             Price = 12.95m,
                             ShortDescription = "Our famous apple pies!"
@@ -352,14 +295,9 @@ namespace _101Shop.Migrations
                         new
                         {
                             PieId = 2,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Cheese pie",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/blueberrycheesecakesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/blueberrycheesecake.jpg",
+                            AllergyInformation = "ima",
                             InStock = true,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallo cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danishe dragée gummies.",
+                            LongDescription = "Icing carrot e gummies.",
                             Name = "Blueberry Cheese Cake",
                             Price = 18.95m,
                             ShortDescription = "You'll love it!"
@@ -367,14 +305,9 @@ namespace _101Shop.Migrations
                         new
                         {
                             PieId = 3,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Cheese pie",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/cheesecakesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/cheesecake.jpg",
+                            AllergyInformation = "..malko",
                             InStock = true,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan molate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuie cupcake dragée gummies.",
+                            LongDescription = "Icinake dragée gummies.",
                             Name = "Cheese Cake",
                             Price = 18.95m,
                             ShortDescription = "Plain cheese cake. Plain pleasure."
@@ -382,122 +315,12 @@ namespace _101Shop.Migrations
                         new
                         {
                             PieId = 4,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Cheese pie",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/cherrypiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/cherrypie.jpg",
+                            AllergyInformation = "..maasdadlko",
                             InStock = true,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee bagée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolateummies.",
-                            Name = "Cherry Pie",
-                            Price = 15.95m,
-                            ShortDescription = "A summer classic!"
-                        },
-                        new
-                        {
-                            PieId = 5,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Seasonal pies",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/christmasapplepiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/christmasapplepie.jpg",
-                            InStock = true,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipahocolate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biownie cupcake dragée gummies.",
-                            Name = "Christmas Apple Pie",
-                            Price = 13.95m,
-                            ShortDescription = "Happy holidays with this pie!"
-                        },
-                        new
-                        {
-                            PieId = 6,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Cheese pie",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/cranberrypiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/cranberrypie.jpg",
-                            InStock = true,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow tokie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish choagée gummies.",
-                            Name = "Cranberry Pie",
-                            Price = 17.95m,
-                            ShortDescription = "A Christmas favorite"
-                        },
-                        new
-                        {
-                            PieId = 7,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Cheese pie",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/peachpiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/peachpie.jpg",
-                            InStock = false,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffee browe brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocolate caies.",
-                            Name = "Peach Pie",
-                            Price = 15.95m,
-                            ShortDescription = "Sweet as peach"
-                        },
-                        new
-                        {
-                            PieId = 8,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Seasonal pies",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/pumpkinpiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/pumpkinpie.jpg",
-                            InStock = true,
-                            IsPieOfTheWeek = true,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow tokie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chragée gummies.",
-                            Name = "Pumpkin Pie",
-                            Price = 12.95m,
-                            ShortDescription = "Our Halloween favorite"
-                        },
-                        new
-                        {
-                            PieId = 9,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Cheese pie",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/rhubarbpiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/rhubarbpie.jpg",
-                            InStock = true,
-                            IsPieOfTheWeek = true,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmallow toffeedragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit danish chocola gummies.",
-                            Name = "Rhubarb Pie",
-                            Price = 15.95m,
-                            ShortDescription = "My God, so sweet!"
-                        },
-                        new
-                        {
-                            PieId = 10,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Cheese pie",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrypiesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrypie.jpg",
-                            InStock = true,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan malate bar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuie cupcake dragée gummies.",
-                            Name = "Strawberry Pie",
-                            Price = 15.95m,
-                            ShortDescription = "Our delicious strawberry pie!"
-                        },
-                        new
-                        {
-                            PieId = 11,
-                            AllergyInformation = "",
-                            CategoryId = 0,
-                            CategoryName = "Fruit pies",
-                            ImageThumbnailUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrycheesecakesmall.jpg",
-                            ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/strawberrycheesecake.jpg",
-                            InStock = false,
-                            IsPieOfTheWeek = false,
-                            LongDescription = "Icing carrot cake jelly-o cheesecake. Sweet roll marzipan marshmalar cookie dragée brownie. Lollipop cotton candy cake bear claw oat cake. Dragée candy canes dessert tart. Marzipan dragée gummies lollipop jujubes chocolate bar candy canes. Icing gingerbread chupa chups cotton candy cookie sweet icing bonbon gummies. Gummies lollipop brownie biscuit daniake dragée gummies.",
-                            Name = "Strawberry Cheese Cake",
-                            Price = 18.95m,
-                            ShortDescription = "You'll love it!"
+                            LongDescription = "Icinake dasdadragée gummies.",
+                            Name = "Cheese Cake",
+                            Price = 28.95m,
+                            ShortDescription = "Plain cheese cacasdasdke. Plain pleasure."
                         });
                 });
 
@@ -572,6 +395,9 @@ namespace _101Shop.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -587,6 +413,20 @@ namespace _101Shop.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "123",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "18266809-1db2-44d5-a823-282daa29e893",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8337d7d2-a6ec-43ef-b062-6cedc7318b20",
+                            TwoFactorEnabled = false,
+                            Type = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -651,15 +491,6 @@ namespace _101Shop.Migrations
                     b.HasOne("_101Shop.Models.Pie", "Pie")
                         .WithMany()
                         .HasForeignKey("PieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("_101Shop.Models.Pie", b =>
-                {
-                    b.HasOne("_101Shop.Models.Category", "Category")
-                        .WithMany("Pies")
-                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

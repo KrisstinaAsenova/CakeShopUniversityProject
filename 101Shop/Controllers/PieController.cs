@@ -3,67 +3,63 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BethanysPieShop.Models;
 using _101Shop.Models;
 using _101Shop.ViewModels;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace _101Shop.Controllers
 {
     public class PieController : Controller
     {
         private readonly IPieRepository _pieRepository;
-        private readonly ICategoryRepository _categoryRepository;
 
-        public PieController(IPieRepository pieRepository, ICategoryRepository categoryRepository)
+        public PieController(IPieRepository pieRepository)
         {
             _pieRepository = pieRepository;
-            _categoryRepository = categoryRepository;
         }
 
-        //public ViewResult List()
-        //{
-        //    PiesListViewModel piesListViewModel = new PiesListViewModel();
-        //    piesListViewModel.Pies = _pieRepository.Pies;
-
-        //    piesListViewModel.CurrentCategory = "Cheese cakes";
-
-        //    return View(piesListViewModel);
-        //}
-
-        public ViewResult List(string category)
+        [HttpGet]
+        public IActionResult Create()
         {
-            IEnumerable<Pie> pies;
-            string currentCategory = string.Empty;
+            return View();
+        }
 
-            if (string.IsNullOrEmpty(category))
-            {
-                pies = _pieRepository.Pies.OrderBy(p => p.PieId);
-                currentCategory = "All pies";
-            }
-            else
-            {
-                pies = _pieRepository.Pies.Where(p => p.Category.CategoryName == category)
-                   .OrderBy(p => p.PieId);
-                currentCategory = _categoryRepository.Categories.FirstOrDefault(c => c.CategoryName == category).CategoryName;
-            }
+        [HttpPost]
+        public IActionResult Create(PieViewModel vm)
+        {
+            var model = _pieRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price);
 
-            return View(new PiesListViewModel
+            return RedirectToAction(nameof(Create));
+        }
+
+        public IActionResult List()
+        {
+            var pies = _pieRepository.GetAllPies();
+            var test = pies.Select(pie => new PieViewModel
             {
-                Pies = pies,
-                CurrentCategory = currentCategory
+                PieId = pie.PieId,
+                Name = pie.Name,
+                ShortDescription = pie.ShortDescription,
+                LongDescription = pie.LongDescription,
+                Price = pie.Price,
+                InStock = pie.InStock,
+                ImageUrl = pie.ImageUrl
+
             });
+            return View(test);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int pieId)
         {
-            var pie = _pieRepository.GetPieById(id);
-            if (pie == null)
-                return NotFound();
-
-            return View(pie);
+            var pie = _pieRepository.GetPieById(pieId);
+            var test = new PieViewModel()
+            {
+                PieId = pie.PieId,
+                Name = pie.Name,
+                ShortDescription = pie.ShortDescription,
+                LongDescription = pie.LongDescription,
+                Price = pie.Price,
+            };
+            return View(test);
         }
-
     }
 }

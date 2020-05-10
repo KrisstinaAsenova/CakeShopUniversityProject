@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using _101Shop.Models;
-using BethanysPieShop.Models;
+//using BethanysPieShop.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace _101Shop
@@ -46,10 +46,10 @@ namespace _101Shop
 
             services.AddTransient<IPieRepository, PieRepository>();
             // All service that depends on DbContext should have Scoped life time.
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            //services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
-            services.AddScoped<IOrderRepository, OrderRepository>();
+            //services.AddScoped<IOrderRepository, OrderRepository>();
 
 
             services.Configure<IdentityOptions>(options =>
@@ -88,10 +88,10 @@ namespace _101Shop
             app.UseEndpoints(endpoints =>
             {
 
-                endpoints.MapControllerRoute(
-                  name: "categoryfilter",
-                  pattern: "Pie/{action}/{category?}",
-                  defaults: new { Controller = "Pie", action = "List" });
+                //endpoints.MapControllerRoute(
+                //  name: "categoryfilter",
+                //  pattern: "Pie/{action}/{category?}",
+                //  defaults: new { Controller = "Pie", action = "List" });
 
                 endpoints.MapControllerRoute(
                    name: "areas",

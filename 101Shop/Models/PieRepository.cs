@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _101Shop.ViewModels;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace _101Shop.Models
     {
         private readonly AppDbContext _appDbContext;
 
-        public PieRepository(AppDbContext appDbContext)
+        public PieRepository(AppDbContext appDbContext) 
         {
             _appDbContext = appDbContext;
         }
@@ -19,21 +21,31 @@ namespace _101Shop.Models
         {
             get
             {
-                return _appDbContext.Pies.Include(c => c.Category);
+                return _appDbContext.Pies;
             }
         }
 
-        public IEnumerable<Pie> PiesOfTheWeek
+
+        public Pie Create(string name, string shortDesc, string longDesc, decimal price)
         {
-            get
-            {
-                return _appDbContext.Pies.Include(c => c.Category).Where(p => p.IsPieOfTheWeek);
-            }
+            var pie = new Pie() { Name = name, ShortDescription = shortDesc, LongDescription = longDesc, Price = price };
+            _appDbContext.Pies.Add(pie);
+            _appDbContext.SaveChanges();
+            return pie;
         }
 
         public Pie GetPieById(int pieId)
         {
-            return _appDbContext.Pies.FirstOrDefault(p => p.PieId == pieId);
+            var pie = _appDbContext.Pies.FirstOrDefault(pie => pie.PieId == pieId);
+            return pie;
+        }
+
+        public ICollection<Pie> GetAllPies()
+        {
+            var pies= _appDbContext.Pies.ToList();
+            
+            
+            return pies;
         }
     }
 }
