@@ -10,8 +10,8 @@ using _101Shop.Models;
 namespace _101Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200510183941_v3")]
-    partial class v3
+    [Migration("20200512162551_initial7")]
+    partial class initial7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,22 @@ namespace _101Shop.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "771f568e-a7d5-496b-90c4-72ff997368e6",
+                            ConcurrencyStamp = "c6fcd199-bb08-4698-9c81-f84cf25a5e84",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "93c66dd9-11c5-4836-b104-a9c333549530",
+                            ConcurrencyStamp = "0580e5f0-98b3-42f0-b38a-f9513d7c9b6d",
+                            Name = "Cook",
+                            NormalizedName = "COOK"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -133,6 +149,18 @@ namespace _101Shop.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
+                            RoleId = "771f568e-a7d5-496b-90c4-72ff997368e6"
+                        },
+                        new
+                        {
+                            UserId = "565dfbc0-2681-4f29-bc97-a619eacf339c",
+                            RoleId = "771f568e-a7d5-496b-90c4-72ff997368e6"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -158,7 +186,7 @@ namespace _101Shop.Migrations
 
             modelBuilder.Entity("_101Shop.Models.Cake", b =>
                 {
-                    b.Property<int>("cakeId")
+                    b.Property<int>("CakeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -184,15 +212,16 @@ namespace _101Shop.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("cakeId");
+                    b.HasKey("CakeId");
 
-                    b.ToTable("cakes");
+                    b.ToTable("Cakes");
 
                     b.HasData(
                         new
                         {
-                            cakeId = 1,
+                            CakeId = 1,
                             AllergyInformation = "nqma",
+                            ImageUrl = "/images/tikva.jpg",
                             InStock = true,
                             LongDescription = "Icing carrot cake mies.",
                             Name = "Apple Cake",
@@ -201,8 +230,9 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            cakeId = 2,
+                            CakeId = 2,
                             AllergyInformation = "ima",
+                            ImageUrl = "/images/shokolad.jpg",
                             InStock = true,
                             LongDescription = "Icing carrot e gummies.",
                             Name = "Blueberry Cheese Cake",
@@ -211,8 +241,9 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            cakeId = 3,
+                            CakeId = 3,
                             AllergyInformation = "..malko",
+                            ImageUrl = "/images/tikva.jpg",
                             InStock = true,
                             LongDescription = "Icinake dragée gummies.",
                             Name = "Cheese Cake",
@@ -221,8 +252,9 @@ namespace _101Shop.Migrations
                         },
                         new
                         {
-                            cakeId = 4,
+                            CakeId = 4,
                             AllergyInformation = "..maasdadlko",
+                            ImageUrl = "/images/shokolad.jpg",
                             InStock = true,
                             LongDescription = "Icinake dasdadragée gummies.",
                             Name = "Cheese Cake",
@@ -334,15 +366,15 @@ namespace _101Shop.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CakeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ShoppingCartId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("cakeId")
-                        .HasColumnType("int");
-
                     b.HasKey("ShoppingCartItemId");
 
-                    b.HasIndex("cakeId");
+                    b.HasIndex("CakeId");
 
                     b.ToTable("ShoppingCartItems");
                 });
@@ -417,13 +449,45 @@ namespace _101Shop.Migrations
                     b.HasData(
                         new
                         {
+                            Id = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e1ac18d2-7988-4e21-9a6a-bd7b749bdebb",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKAt6x4LozPO5r7hVo6rLwhx0vMB/yq5WPKNfsbFLO4Bm/tHL4MsFV4QGDPeje1ElQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "565dfbc0-2681-4f29-bc97-a619eacf339c",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "076d8bc6-3831-4b5b-86c4-6742e79c3180",
+                            Email = "cook@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "COOK@GMAIL.COM",
+                            NormalizedUserName = "COOK",
+                            PasswordHash = "AQAAAAEAACcQAAAAECFAPh+NPyhHc3kc/zOcm89KVFVyQif/CNdVfjJ4Nh8aaIW0fsCGcZmmo2Odf2t73A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "15CLJEKQCTLPRXMVXXNSWXZH6R6KJRRU",
+                            TwoFactorEnabled = false,
+                            UserName = "cook"
+                        },
+                        new
+                        {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dffbe939-638b-499d-bf5c-db857d435279",
+                            ConcurrencyStamp = "1c1ec9e0-052d-42e6-be36-c245086d237f",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1968be12-196f-4ff9-9ba2-cb4ae9766acd",
+                            SecurityStamp = "eb8cc652-7c71-4283-b4ff-e96b18563297",
                             TwoFactorEnabled = false,
                             Type = "Admin"
                         });
@@ -499,7 +563,7 @@ namespace _101Shop.Migrations
                 {
                     b.HasOne("_101Shop.Models.Cake", "Cake")
                         .WithMany()
-                        .HasForeignKey("cakeId");
+                        .HasForeignKey("CakeId");
                 });
 #pragma warning restore 612, 618
         }

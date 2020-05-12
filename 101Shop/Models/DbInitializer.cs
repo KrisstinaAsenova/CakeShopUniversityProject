@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,6 +13,33 @@ namespace _101Shop.Models
     {
         public static void Seed(this ModelBuilder builder)
         {
+            builder.Entity<IdentityRole>().HasData(
+               new IdentityRole { Id = "771f568e-a7d5-496b-90c4-72ff997368e6", Name = "Admin", NormalizedName = "ADMIN" },
+               new IdentityRole { Id = "93c66dd9-11c5-4836-b104-a9c333549530", Name = "Cook", NormalizedName = "COOK" }
+           );
+
+            var hasher = new PasswordHasher<User>();
+
+            User admin = new User { Id = "fe86f129-41f3-4ab8-a61c-5f47239a1393", UserName = "admin", NormalizedUserName = "ADMIN", Email = "admin@gmail.com", NormalizedEmail = "ADMIN@GMAIL.COM", LockoutEnabled = true};
+            admin.PasswordHash = hasher.HashPassword(admin, "admin123");
+
+            User cook = new User { Id = "565dfbc0-2681-4f29-bc97-a619eacf339c", UserName = "cook", NormalizedUserName = "COOK", Email = "cook@gmail.com", NormalizedEmail = "COOK@GMAIL.COM", LockoutEnabled = true};
+            cook.PasswordHash = hasher.HashPassword(cook, "cook123");
+
+            builder.Entity<User>().HasData(admin, cook);
+
+
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "771f568e-a7d5-496b-90c4-72ff997368e6",
+                    UserId = admin.Id
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = "771f568e-a7d5-496b-90c4-72ff997368e6",
+                    UserId = cook.Id
+                });
 
             //var category1 = new Category { CategoryId = 114, CategoryName = "Fruit cakes", Description = "All-fruity cakes" };
             //var category2 = new Category { CategoryId = 112, CategoryName = "Cheese cakes", Description = "Cheesy all the way" };

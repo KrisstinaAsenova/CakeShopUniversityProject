@@ -44,6 +44,22 @@ namespace _101Shop.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "771f568e-a7d5-496b-90c4-72ff997368e6",
+                            ConcurrencyStamp = "2de9c476-baae-4f54-b242-d697f61b665b",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "93c66dd9-11c5-4836-b104-a9c333549530",
+                            ConcurrencyStamp = "da0fe6fd-2e73-459f-a997-8fad93f02da4",
+                            Name = "Cook",
+                            NormalizedName = "COOK"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -131,6 +147,18 @@ namespace _101Shop.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
+                            RoleId = "771f568e-a7d5-496b-90c4-72ff997368e6"
+                        },
+                        new
+                        {
+                            UserId = "565dfbc0-2681-4f29-bc97-a619eacf339c",
+                            RoleId = "771f568e-a7d5-496b-90c4-72ff997368e6"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -419,13 +447,45 @@ namespace _101Shop.Migrations
                     b.HasData(
                         new
                         {
+                            Id = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9d6ce619-1c1c-41d2-b572-d6b80610cc3a",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAENx7NFTQ24J0esdUz6W5N0rUfy7WTaDFHwC2Apl3FicqV9Jk7+TfcxlOY8f7FY4Hhw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "73ca3518-684a-4159-8d84-5a2dd5e1c721",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "565dfbc0-2681-4f29-bc97-a619eacf339c",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a038bde7-9854-4c34-bba6-740e1f9c5d82",
+                            Email = "cook@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "COOK@GMAIL.COM",
+                            NormalizedUserName = "COOK",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGzunSJY981+qkAvxAdVILMRmxM9CSKZ5+YF7H6DPwl3CaFLciKx2EVZFSMuxsw8gg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4d6587b8-c9a7-4ba9-bb12-33d144761b76",
+                            TwoFactorEnabled = false,
+                            UserName = "cook"
+                        },
+                        new
+                        {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "514da16f-1522-46e7-a069-eeaf6fd28220",
+                            ConcurrencyStamp = "8f905db6-4607-463a-9b61-5f191c7c9616",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "395a596b-3acd-4b5a-b4ed-e083407461c8",
+                            SecurityStamp = "a44d4623-0dac-41ca-be9d-3216ff50b4be",
                             TwoFactorEnabled = false,
                             Type = "Admin"
                         });

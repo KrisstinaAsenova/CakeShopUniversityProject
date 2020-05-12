@@ -2,7 +2,7 @@
 
 namespace _101Shop.Migrations
 {
-    public partial class v3 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace _101Shop.Migrations
                 keyColumn: "Id",
                 keyValue: "123",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "dffbe939-638b-499d-bf5c-db857d435279", "1968be12-196f-4ff9-9ba2-cb4ae9766acd" });
+                values: new object[] { "e7f64b18-f2fd-41e4-a556-6022be33dcf2", "1b89b4a1-08cc-433b-8a0c-848f3f90a2ad" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -21,7 +21,7 @@ namespace _101Shop.Migrations
                 keyColumn: "Id",
                 keyValue: "123",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "18266809-1db2-44d5-a823-282daa29e893", "8337d7d2-a6ec-43ef-b062-6cedc7318b20" });
+                values: new object[] { "514da16f-1522-46e7-a069-eeaf6fd28220", "395a596b-3acd-4b5a-b4ed-e083407461c8" });
         }
     }
 }

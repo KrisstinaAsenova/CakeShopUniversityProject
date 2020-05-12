@@ -1,17 +1,27 @@
 ﻿@model CakeViewModel
 
-<div class="thumbnail">
-    <img alt="@Model.Name" src="@Model.ImageUrl">
-    <div class="caption-full">
-        <h3 class="pull-right">@Model.Price</h3>
-        <h3>
-            <a href="#">@Model.Name</a>
-        </h3>
-        <h4>@Model.ShortDescription</h4>
-        <p>@Model.LongDescription</p>
-        <p class="button">
-            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-               asp-route-cakeId="@Model.CakeId">Add to cart</a>
-        </p>
+<link href="~/css/detail.css" rel="stylesheet" type="text/css">
+
+<div class="container">
+
+    <div class="card border-0 shadow my-5">
+        <div class="row">
+            <div class="col-3" style="align-self:center; padding-left:40px">
+                <img style="width: 250px; height: 260px;" alt="@Model.Name" src="~/images/tikva.jpg">
+            </div>
+
+            <div class="col-9 card-body p-5 amber-text">
+                <h3 class="pull-right">@Model.Price</h3>
+                <h3>
+                    <a href="#">@Model.Name</a>
+                </h3>
+                <h4>@Model.ShortDescription</h4>
+                <p>@Model.LongDescription</p>
+                <p class="button">
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                       asp-route-cakeId="@Model.CakeId">Add to cart</a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>

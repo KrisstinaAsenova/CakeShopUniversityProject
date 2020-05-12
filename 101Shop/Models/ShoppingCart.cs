@@ -19,18 +19,18 @@ namespace _101Shop.Models
 
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
-        public static ShoppingCart GetCart(IServiceProvider services)
-        {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?
-                .HttpContext.Session;
+        //public static ShoppingCart GetCart(IServiceProvider services)
+        //{
+        //    ISession session = services.GetRequiredService<IHttpContextAccessor>()?
+        //        .HttpContext.Session;
 
-            var context = services.GetService<AppDbContext>();
-            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+        //    var context = services.GetService<AppDbContext>();
+        //    string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
 
-            session.SetString("CartId", cartId);
+        //    session.SetString("CartId", cartId);
 
-            return new ShoppingCart(context) { ShoppingCartId = cartId };
-        }
+        //    return new ShoppingCart(context) { ShoppingCartId = cartId };
+        //}
 
         public void AddToCart(Cake cake, int amount)
         {

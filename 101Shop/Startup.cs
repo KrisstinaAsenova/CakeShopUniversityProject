@@ -48,8 +48,8 @@ namespace _101Shop
             // All service that depends on DbContext should have Scoped life time.
             //services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
-            //services.AddScoped<IOrderRepository, OrderRepository>();
+            //services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
 
             services.Configure<IdentityOptions>(options =>
