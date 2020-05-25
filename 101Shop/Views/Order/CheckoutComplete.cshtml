@@ -1,8 +1,8 @@
-﻿<link href="~/css/delivery.css" rel="stylesheet" type="text/css">
-
-<div style="margin-top:110px;">
+﻿
+<link href="~/css/delivery.css" rel="stylesheet" type="text/css">
+<div id="Tracker" style="margin-top:110px;">
     <h1>Проследи своята поръчка в реално време.</h1>
-    <ol class="progtrckr" data-progtrckr-steps="5">
+    <ol class="progtrckr" id="ProgressTracker" data-progtrckr-steps="5">
         <li class="progtrckr-done">Order Processing</li>
         <!--
         -->
@@ -12,9 +12,20 @@
         <li class="progtrckr-done">In Production</li>
         <!--
         -->
-        <li class="progtrckr-todo">Shipped</li>
+        <li class="progtrckr-done">Shipped</li>
         <!--
         -->
         <li class="progtrckr-todo">Delivered</li>
     </ol>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        setInterval(function () {
+            $.get("/https://localhost:44358/Order/CheckoutComplete", {},
+                function (returnedHtml) {
+                    $("#Tracker").html(returnedHtml);
+                });
+        }, 1000);
+    });
+</script>

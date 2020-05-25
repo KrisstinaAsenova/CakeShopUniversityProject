@@ -43,7 +43,8 @@ namespace _101Shop.Controllers
             {
                 _shoppingCart.AddToCart(selectedcake, 1);
             }
-            return RedirectToAction("Index");
+            //TODO
+            return RedirectToAction("List","Cake");
         }
 
         public RedirectToActionResult RemoveFromShoppingCart(int cakeId)
@@ -56,5 +57,6 @@ namespace _101Shop.Controllers
             }
             return RedirectToAction("Index");
         }
+
     }
 }

@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<CakeViewModel>
 @{
-    ViewData["Title"] = "AllCakes";
+    ViewData["Title"] = "Specials";
 }
 
 <link href="~/css/cbg.css" rel="stylesheet" type="text/css">
 
-<h1>Нашите предложения!</h1>
+<h1>Специални предложения!</h1>
 <br />
 <div class="row h-100">
     @foreach (var cake in Model)
@@ -29,8 +29,8 @@
                            asp-route-CakeId="@cake.CakeId">Add to cart</a>
                     </p>
                 </div>
-                
+
             </div>
         </div>
     }
-    </div>
+</div>

@@ -1,35 +1,48 @@
 ﻿@model ShoppingCartViewModel
 
-<h2>Your shopping cart</h2>
-<h4>Here are the delicious cakes in your shopping cart.</h4>
+<h2>Твоята количка</h2>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Selected amount</th>
-            <th>Cake</th>
-            <th class="text-right">Price</th>
-            <th class="text-right">Subtotal</th>
+            <th>Количество</th>
+            <th>Кексчета</th>
+            <th class="text-right">Цена</th>
+            <th class="text-right">Subtotal.....</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
         {
             <tr>
-                <td class="text-center">@line.Amount</td>
-                <td class="text-left">@line.Cake.Name</td>
-                <td class="text-right">@line.Cake.Price.ToString("c")</td>
-                <td class="text-right">
-                    @((line.Amount * line.Cake.Price).ToString("c"))
-                </td>
-            </tr>
-        }
+                <td class="text-center">
+                    @line.Amount
+                <a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-cakeId="@line.Cake.CakeId"> Премахни</a>
+            </td>
+            <td class="text-left">@line.Cake.Name</td>
+            <td class="text-right">@line.Cake.Price.ToString("c")</td>
+            <td class="text-right">
+                @((line.Amount * line.Cake.Price).ToString("c"))
+            </td>
+        </tr>
+    }
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3" class="text-right">Total:</td>
+            <td colspan="3" class="text-right">Общо:</td>
             <td class="text-right">
                 @Model.ShoppingCartTotal.ToString("c")
             </td>
+            
         </tr>
+        <tr>
+            <td class="text-right" colspan="4" >
+                <a asp-controller="Order" asp-action="Checkout">Завърши поръчка</a>
+            </td>
+        </tr>
+
+
     </tfoot>
+    
+        
 </table>
+

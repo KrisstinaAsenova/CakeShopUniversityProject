@@ -7,7 +7,9 @@
         {
 
             <li>
-                <a href="#"><i style="margin-top:11px; font-size:20px; color:black; margin-right:5px" class="fas fa-shopping-cart"></i></a>
+                <a asp-controller="ShoppingCart" asp-action="Index">
+                    <i style="margin-top:11px; font-size:20px; color:black; margin-right:5px" class="fas fa-shopping-cart"></i>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" @*asp-area="Identity" asp-page="/Account/Manage/Index"*@ title="Manage">Здравей, @User.Identity.Name!</a>
@@ -17,6 +19,19 @@
                     <button type="submit" class="nav-link btn btn-link text-dark">Изход</button>
                 </form>
             </li>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <li>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Cake" asp-action="Create">Добави кексче</a>
+                </li>
+            }
+            else (User.IsInRole("Cook"))
+            {
+                <li>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Cake" asp-action="Create">Активни поръчки</a>
+                </li>
+            }
 
         }
         else

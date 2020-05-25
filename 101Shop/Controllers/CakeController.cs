@@ -47,6 +47,23 @@ namespace _101Shop.Controllers
             });
             return View(test);
         }
+        public IActionResult Specials()
+        {
+            // TODO GetSpecialCakes
+            var cakes = _cakeRepository.GetAllCakes();
+            var test = cakes.Select(cake => new CakeViewModel
+            {
+                CakeId = cake.CakeId,
+                Name = cake.Name,
+                ShortDescription = cake.ShortDescription,
+                LongDescription = cake.LongDescription,
+                Price = cake.Price,
+                InStock = cake.InStock,
+                ImageUrl = cake.ImageUrl
+
+            });
+            return View(test);
+        }
 
         public IActionResult Details(int cakeId)
         {
