@@ -26,7 +26,7 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Cake" asp-action="Create">Добави кексче</a>
                 </li>
             }
-            else (User.IsInRole("Cook"))
+            else if (User.IsInRole("Cook"))
             {
                 <li>
                     <a class="nav-link text-dark" asp-area="" asp-controller="Cake" asp-action="Create">Активни поръчки</a>
