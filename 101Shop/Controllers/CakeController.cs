@@ -39,8 +39,9 @@ namespace _101Shop.Controllers
             return RedirectToAction(nameof(List));
         }
 
-        public IActionResult EditCake(CakeViewModel vm)
+        public IActionResult EditCake(int cakeId)
         {
+            //TODO call this method with CakeViewModel parameter
             //var cakeToEdit = _cakeRepository.GetcakeById(cakeId);
 
             return RedirectToAction(nameof(List));
