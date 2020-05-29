@@ -24,13 +24,26 @@
                     <div>
                         <a asp-action="Details" asp-route-CakeId="@cake.CakeId">Details</a>
                     </div>
-                    <p class="button">
-                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-                           asp-route-CakeId="@cake.CakeId">Add to cart</a>
-                    </p>
+                    <div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                        <div style="font-size:32px; margin-left:123px">
+                            <a asp-action="Remove" asp-route-CakeId="@cake.CakeId">
+                                <i class="fas fa-window-close"></i>
+                            </a>
+                            <a asp-route-CakeId="@cake.CakeId" asp-controller="Cake" asp-action="GetCake" >
+                                <i class="fas fa-pen-square"></i>
+                            </a>
+                        </div>
+                        }
+                        <p class="button">
+                            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                               asp-route-CakeId="@cake.CakeId">Add to cart</a>
+                        </p>
+                    </div>
                 </div>
-                
+
             </div>
         </div>
     }
-    </div>
+</div>

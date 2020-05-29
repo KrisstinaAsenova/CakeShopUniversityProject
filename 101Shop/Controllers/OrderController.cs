@@ -78,8 +78,8 @@ namespace _101Shop.Controllers
                 FirstName = order.FirstName,
                 AddressLine = order.AddressLine,
                 PhoneNumber = order.PhoneNumber,
-                OrderTotal = _shoppingCart.GetShoppingCartTotal()
-            }) ;
+                OrderTotal = order.OrderTotal
+            });
 
             return View(test);
         }

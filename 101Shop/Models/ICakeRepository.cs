@@ -11,8 +11,14 @@ namespace _101Shop.Models
 
         Cake GetcakeById(int cakeId);
 
-        Cake Create(string name, string shortDesc, string longDesc, decimal price);
+        Cake Create(string name, string shortDesc, string longDesc, decimal price, string allergyInformation, string imageURL, bool isSpecial);
+
+        void RemoveCake(int cakeId);
+
+        void EditCake(Cake cake);
 
         ICollection<Cake> GetAllCakes();
+
+        ICollection<Cake> GetAllSpecialCakes();
     }
 }

@@ -10,6 +10,6 @@ namespace _101Shop.Models
     [Table("AspNetUsers")]
     public class User : IdentityUser
     {
-        public string Type { get; set; }
+
     }
 }

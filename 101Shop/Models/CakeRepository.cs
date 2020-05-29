@@ -26,9 +26,18 @@ namespace _101Shop.Models
         }
 
 
-        public Cake Create(string name, string shortDesc, string longDesc, decimal price)
+        public Cake Create(string name, string shortDesc, string longDesc, decimal price, string allergyInformation, string imageURL, bool isSpecial)
         {
-            var cake = new Cake() { Name = name, ShortDescription = shortDesc, LongDescription = longDesc, Price = price };
+            var cake = new Cake()
+            {
+                Name = name,
+                ShortDescription = shortDesc,
+                LongDescription = longDesc,
+                Price = price,
+                AllergyInformation = allergyInformation,
+                ImageUrl = imageURL,
+                IsSpecial = isSpecial
+            };
             _appDbContext.Cakes.Add(cake);
             _appDbContext.SaveChanges();
             return cake;
@@ -42,10 +51,28 @@ namespace _101Shop.Models
 
         public ICollection<Cake> GetAllCakes()
         {
-            var cakes= _appDbContext.Cakes.ToList();
-            
-            
+            var cakes = _appDbContext.Cakes.Where(x => !x.IsSpecial).ToList();
             return cakes;
         }
+        public ICollection<Cake> GetAllSpecialCakes()
+        {
+            var specialCakes = _appDbContext.Cakes.Where(x => x.IsSpecial).ToList();
+            return specialCakes;
+        }
+
+        public void RemoveCake(int cakeId)
+        {
+            var removeCake = _appDbContext.Cakes.FirstOrDefault(x => x.CakeId == cakeId);
+            _appDbContext.Cakes.Remove(removeCake);
+            _appDbContext.SaveChanges();
+        }
+
+        public void EditCake(Cake cake) {
+            var editCake = _appDbContext.Cakes.FirstOrDefault(x => x.CakeId == cake.CakeId);
+
+            //editCake = cake;
+            //_appDbContext.SaveChanges();
+        }
+
     }
 }

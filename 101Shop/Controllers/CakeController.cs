@@ -23,12 +23,46 @@ namespace _101Shop.Controllers
             return View();
         }
 
+        //Как се вика Create метода ???
         [HttpPost]
         public IActionResult Create(CakeViewModel vm)
         {
-            var model = _cakeRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price);
+            var model = _cakeRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price, vm.AllergyInformation, vm.ImageUrl, vm.IsSpecial);
 
             return RedirectToAction(nameof(Create));
+        }
+
+        public IActionResult Remove(int cakeId)
+        {
+            _cakeRepository.RemoveCake(cakeId);
+
+            return RedirectToAction(nameof(List));
+        }
+
+        public IActionResult EditCake(CakeViewModel vm)
+        {
+            //var cakeToEdit = _cakeRepository.GetcakeById(cakeId);
+
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpGet]
+        public IActionResult GetCake(int cakeId)
+        {
+            var cake=_cakeRepository.GetcakeById(cakeId);
+            var cakeViewModelToEdit = new CakeViewModel
+            {
+                CakeId = cake.CakeId,
+                Name = cake.Name,
+                ShortDescription = cake.ShortDescription,
+                LongDescription = cake.LongDescription,
+                Price = cake.Price,
+                ImageUrl = cake.ImageUrl,
+                AllergyInformation = cake.AllergyInformation,
+                IsSpecial = cake.IsSpecial
+
+            };
+            return View("EditCake",cakeViewModelToEdit);
         }
 
         public IActionResult List()
@@ -41,7 +75,6 @@ namespace _101Shop.Controllers
                 ShortDescription = cake.ShortDescription,
                 LongDescription = cake.LongDescription,
                 Price = cake.Price,
-                InStock = cake.InStock,
                 ImageUrl = cake.ImageUrl
 
             });
@@ -49,16 +82,14 @@ namespace _101Shop.Controllers
         }
         public IActionResult Specials()
         {
-            // TODO GetSpecialCakes
-            var cakes = _cakeRepository.GetAllCakes();
-            var test = cakes.Select(cake => new CakeViewModel
+            var specialCakes = _cakeRepository.GetAllSpecialCakes();
+            var test = specialCakes.Select(cake => new CakeViewModel
             {
                 CakeId = cake.CakeId,
                 Name = cake.Name,
                 ShortDescription = cake.ShortDescription,
                 LongDescription = cake.LongDescription,
                 Price = cake.Price,
-                InStock = cake.InStock,
                 ImageUrl = cake.ImageUrl
 
             });

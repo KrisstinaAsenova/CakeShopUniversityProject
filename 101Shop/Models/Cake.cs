@@ -16,6 +16,6 @@ namespace _101Shop.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
-        public bool InStock { get; set; }
+        public bool IsSpecial { get; set; }
     }
 }
