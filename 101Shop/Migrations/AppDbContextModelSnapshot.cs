@@ -49,14 +49,14 @@ namespace _101Shop.Migrations
                         new
                         {
                             Id = "771f568e-a7d5-496b-90c4-72ff997368e6",
-                            ConcurrencyStamp = "78cf7ae4-af03-4056-9260-c3ae6a9fb9ae",
+                            ConcurrencyStamp = "c8ea55ad-6dc2-4568-9b85-35bccfc17c96",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "93c66dd9-11c5-4836-b104-a9c333549530",
-                            ConcurrencyStamp = "c1e9d79c-c5cc-441d-91c2-f60be1749b8c",
+                            ConcurrencyStamp = "4d2a7da3-4f5d-4d7b-a0bd-4960122b2010",
                             Name = "Cook",
                             NormalizedName = "COOK"
                         });
@@ -314,20 +314,20 @@ namespace _101Shop.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<int>("CakeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("cakeId")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderDetailId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("CakeId");
 
-                    b.HasIndex("cakeId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -427,15 +427,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e0db9247-99d8-4467-aa88-14b090449b97",
+                            ConcurrencyStamp = "8a062aa6-322c-4027-9ae8-ae05d3a1f1e8",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL/BdqA1s4sh452BSR+712kpPZvfMz34MhrjgrHKSJaq5XqDXXd59UrxrHQvEGCB6A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGavU8xDgjLmqQQUG3EbG7p2bfvJKFUWuWwOopYC2jB6LyzxrERIjPKWNaSYuxOFOw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3ff73c6c-a665-4395-a9f0-2891738dc9f9",
+                            SecurityStamp = "25914e69-a470-4639-a112-49833b72aaa3",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -443,15 +443,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "565dfbc0-2681-4f29-bc97-a619eacf339c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1e6c38c2-783d-4a36-9dd2-aab8cd56bb16",
+                            ConcurrencyStamp = "02d9d130-c0f7-4388-8cb2-05b933c9a8a9",
                             Email = "cook@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "COOK@GMAIL.COM",
                             NormalizedUserName = "COOK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOdiUrf0xwX93jnMnvdvM1ElWfhnFbE5kkK3lQYAaerNj1IGwvuEBxWvzHYTtwK0/Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHxuMgIr4GlnYH0C5B1Qm4y09eM+qfW00MNMRKnswAP26g+fXVk5dCv3AgzgOsb/JQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d1b279dd-788f-4d8a-a86d-c5d6c914c06f",
+                            SecurityStamp = "fdb66701-9cc0-4c44-a47a-e03974902ce6",
                             TwoFactorEnabled = false,
                             UserName = "cook"
                         },
@@ -459,11 +459,11 @@ namespace _101Shop.Migrations
                         {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b916fb33-32bb-435c-84eb-d2b7ac3458e8",
+                            ConcurrencyStamp = "8dde2a92-a07b-47e8-bd55-dd47b071203c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bbf54a49-14d5-4554-8ae3-10b075bc1f50",
+                            SecurityStamp = "fa50f7ca-e956-4899-8edf-1d21b8372785",
                             TwoFactorEnabled = false,
                             Type = "Admin"
                         });
@@ -522,15 +522,15 @@ namespace _101Shop.Migrations
 
             modelBuilder.Entity("_101Shop.Models.OrderDetail", b =>
                 {
-                    b.HasOne("_101Shop.Models.Order", "Order")
-                        .WithMany("OrderLines")
-                        .HasForeignKey("OrderId")
+                    b.HasOne("_101Shop.Models.Cake", "Cake")
+                        .WithMany()
+                        .HasForeignKey("CakeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("_101Shop.Models.Cake", "Cake")
-                        .WithMany()
-                        .HasForeignKey("cakeId")
+                    b.HasOne("_101Shop.Models.Order", "Order")
+                        .WithMany("OrderLines")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

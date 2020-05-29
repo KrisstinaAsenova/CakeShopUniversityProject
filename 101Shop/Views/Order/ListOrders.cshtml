@@ -1,0 +1,32 @@
+﻿@model IEnumerable<OrderDetailViewModel>
+
+    <link href="~/css/detail.css" rel="stylesheet" type="text/css">
+
+<div class="container">
+    <div class="card border-0 shadow my-11">
+        <div class="row">
+            <div class="col-11 card-body p-11 amber-text">
+                <h2>Лист с поръчки</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Номер на поръчка</th>
+                            <th>Номер на кексче</th>
+                            <th>Количество</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in Model)
+                        {
+                            <tr>
+                                <td class="text-left">@line.OrderId</td>
+                                <td class="text-right">@line.CakeId</td>
+                                <td class="text-right">@line.Amout</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

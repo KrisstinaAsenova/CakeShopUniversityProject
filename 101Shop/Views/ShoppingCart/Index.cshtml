@@ -1,48 +1,57 @@
 ﻿@model ShoppingCartViewModel
 
-<h2>Твоята количка</h2>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Количество</th>
-            <th>Кексчета</th>
-            <th class="text-right">Цена</th>
-            <th class="text-right">Общо</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
-        {
-            <tr>
-                <td class="text-center">
-                    @line.Amount
-                <a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-cakeId="@line.Cake.CakeId"> Премахни</a>
-            </td>
-            <td class="text-left">@line.Cake.Name</td>
-            <td class="text-right">@line.Cake.Price.ToString("c")</td>
-            <td class="text-right">
-                @((line.Amount * line.Cake.Price).ToString("c"))
-            </td>
-        </tr>
-    }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3" class="text-right">Крайна сума:</td>
-            <td class="text-right">
-                @Model.ShoppingCartTotal.ToString("c")
-            </td>
-            
-        </tr>
-        <tr>
-            <td class="text-right" colspan="4" >
-                <a asp-controller="Order" asp-action="Checkout">Завърши поръчка</a>
-            </td>
-        </tr>
+
+<link href="~/css/detail.css" rel="stylesheet" type="text/css">
+<div class="container">
+    <div class="card border-0 shadow my-11">
+        <div class="row">
+            <div class="col-11 card-body p-11 amber-text">
+                <h2>Твоята количка</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Количество</th>
+                            <th>Кексчета</th>
+                            <th class="text-right">Цена</th>
+                            <th class="text-right">Общо</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @line.Amount
+                                    <a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-cakeId="@line.Cake.CakeId"> Премахни</a>
+                                </td>
+                                <td class="text-left">@line.Cake.Name</td>
+                                <td class="text-right">@line.Cake.Price.ToString("c")</td>
+                                <td class="text-right">
+                                    @((line.Amount * line.Cake.Price).ToString("c"))
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Крайна сума:</td>
+                            <td class="text-right">
+                                @Model.ShoppingCartTotal.ToString("c")
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="4">
+                                <a asp-controller="Order" asp-action="Checkout">Завърши поръчка</a>
+                            </td>
+                        </tr>
 
 
-    </tfoot>
-    
-        
-</table>
+                    </tfoot>
 
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

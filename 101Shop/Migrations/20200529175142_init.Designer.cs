@@ -10,8 +10,8 @@ using _101Shop.Models;
 namespace _101Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200512162551_initial7")]
-    partial class initial7
+    [Migration("20200529175142_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,14 +51,14 @@ namespace _101Shop.Migrations
                         new
                         {
                             Id = "771f568e-a7d5-496b-90c4-72ff997368e6",
-                            ConcurrencyStamp = "c6fcd199-bb08-4698-9c81-f84cf25a5e84",
+                            ConcurrencyStamp = "86eba4c1-90ac-4c18-a4bc-700b12503a57",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "93c66dd9-11c5-4836-b104-a9c333549530",
-                            ConcurrencyStamp = "0580e5f0-98b3-42f0-b38a-f9513d7c9b6d",
+                            ConcurrencyStamp = "9b61e4b5-4d4c-4482-9d1e-c713c482c21e",
                             Name = "Cook",
                             NormalizedName = "COOK"
                         });
@@ -270,23 +270,10 @@ namespace _101Shop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddressLine1")
+                    b.Property<string>("AddressLine")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
-
-                    b.Property<string>("AddressLine2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -313,15 +300,6 @@ namespace _101Shop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
 
                     b.HasKey("OrderId");
 
@@ -451,15 +429,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e1ac18d2-7988-4e21-9a6a-bd7b749bdebb",
+                            ConcurrencyStamp = "7eb9afd6-57aa-4c88-bb40-481554f08e8e",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKAt6x4LozPO5r7hVo6rLwhx0vMB/yq5WPKNfsbFLO4Bm/tHL4MsFV4QGDPeje1ElQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBj+PO/wnvA3T3erfshhFRXJXM0P9USc2osLbyeXsTuvpJ86XM34sj0FzvxGCB2Y2A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7I5VNHIJTSZNOT3KDWKNFUV5PVYBHGXN",
+                            SecurityStamp = "eaaeb8a7-3aa1-4d0e-bcc1-4b949a600c59",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -467,15 +445,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "565dfbc0-2681-4f29-bc97-a619eacf339c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "076d8bc6-3831-4b5b-86c4-6742e79c3180",
+                            ConcurrencyStamp = "bf4cbd85-5acc-47e0-8d13-3a59c5421d09",
                             Email = "cook@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "COOK@GMAIL.COM",
                             NormalizedUserName = "COOK",
-                            PasswordHash = "AQAAAAEAACcQAAAAECFAPh+NPyhHc3kc/zOcm89KVFVyQif/CNdVfjJ4Nh8aaIW0fsCGcZmmo2Odf2t73A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECJ6EgsW//4yWrmmee/3yUi6WQ6u20b7Syl5MhlSqER/Q6x4ItRk6qGb9Q+pLBwBpg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "15CLJEKQCTLPRXMVXXNSWXZH6R6KJRRU",
+                            SecurityStamp = "daa6a7ce-6a44-42fb-9ba4-262a8b3f5ae5",
                             TwoFactorEnabled = false,
                             UserName = "cook"
                         },
@@ -483,11 +461,11 @@ namespace _101Shop.Migrations
                         {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c1ec9e0-052d-42e6-be36-c245086d237f",
+                            ConcurrencyStamp = "b57969d5-f488-41af-b915-ba5d9ab77d5c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb8cc652-7c71-4283-b4ff-e96b18563297",
+                            SecurityStamp = "0d02e4e3-20f1-4f8c-bfdd-7c123eb77e8b",
                             TwoFactorEnabled = false,
                             Type = "Admin"
                         });

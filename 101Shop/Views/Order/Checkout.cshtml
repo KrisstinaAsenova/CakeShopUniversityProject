@@ -3,9 +3,9 @@
 <link href="~/css/detail.css" rel="stylesheet" type="text/css">
 
 <div class="container">
-    <div class="card border-0 shadow my-5">
+    <div class="card border-0 shadow my-11">
         <div class="row">
-            <div class="col-9 card-body p-5 amber-text">
+            <div class="col-11 card-body p-5 amber-text">
                 <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
                     <h4>Ти си на една стъпка от вкусните ни кексчета.</h4>
                     <div asp-validation-summary="All" class="text-danger"></div>
@@ -52,7 +52,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-5">
-                            <input type="submit" class="btn btn-primary" asp-action="CheckoutComplete" asp-route-id="" value="Завърши поръчка" />
+                            <input type="submit" class="btn btn-primary" asp-action="Checkout" asp-route-id="" value="Завърши поръчка" />
                         </div>
                     </div>
 

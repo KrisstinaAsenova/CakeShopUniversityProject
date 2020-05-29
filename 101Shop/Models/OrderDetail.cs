@@ -9,7 +9,7 @@ namespace _101Shop.Models
     {
         public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
-        public int cakeId { get; set; }
+        public int CakeId { get; set; }
         public int Amount { get; set; }
         public decimal Price { get; set; }
         public virtual Cake Cake { get; set; }

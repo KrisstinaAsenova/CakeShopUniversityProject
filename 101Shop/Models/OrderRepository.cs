@@ -8,36 +8,51 @@ namespace _101Shop.Models
     public class OrderRepository : IOrderRepository
     {
         private readonly AppDbContext _appDbContext;
+        private readonly ShoppingCart _shoppingCart;
 
-
-        public OrderRepository(AppDbContext appDbContext)
+        public OrderRepository(AppDbContext appDbContext, ShoppingCart shoppingCart)
         {
             _appDbContext = appDbContext;
+            _shoppingCart = shoppingCart;
         }
 
+        public void CreateOrder(Order order)
+        {
+            order.OrderPlaced = DateTime.Now;
 
-        //public void CreateOrder(Order order)
-        //{
-        //    order.OrderPlaced = DateTime.Now;
+            _appDbContext.Orders.Add(order);
+            _appDbContext.SaveChanges();
 
-        //    _appDbContext.Orders.Add(order);
+            var shoppingCartItems = _shoppingCart.ShoppingCartItems;
 
-        //    var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+            foreach (var shoppingCartItem in shoppingCartItems)
+            {
+                var orderDetail = new OrderDetail()
+                {
+                    Amount = shoppingCartItem.Amount,
+                    CakeId = shoppingCartItem.Cake.CakeId,
+                    OrderId = order.OrderId,
+                    Price = shoppingCartItem.Cake.Price
+                };
 
-        //    foreach (var shoppingCartItem in shoppingCartItems)
-        //    {
-        //        var orderDetail = new OrderDetail()
-        //        {
-        //            Amount = shoppingCartItem.Amount,
-        //            cakeId = shoppingCartItem.Cake.CakeId,
-        //            OrderId = order.OrderId,
-        //            Price = shoppingCartItem.Cake.Price
-        //        };
+                _appDbContext.OrderDetails.Add(orderDetail);
+            }
 
-        //        _appDbContext.OrderDetails.Add(orderDetail);
-        //    }
+            _appDbContext.SaveChanges();
+        }
 
-        //    _appDbContext.SaveChanges();
-        //}
+        public ICollection<OrderDetail> GetAllOrders()
+        {
+            var orders = _appDbContext.OrderDetails.ToList();
+
+            return orders;
+        }
+
+        public ICollection<Order> GetAllOrdersForDelivery()
+        {
+            var orders = _appDbContext.Orders.ToList();
+
+            return orders;
+        }
     }
 }

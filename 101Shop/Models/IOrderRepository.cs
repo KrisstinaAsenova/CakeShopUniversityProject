@@ -7,6 +7,8 @@ namespace _101Shop.Models
 {
     public interface IOrderRepository
     {
-        //void CreateOrder(Order order);
+        void CreateOrder(Order order);
+        ICollection<OrderDetail> GetAllOrders();
+        ICollection<Order> GetAllOrdersForDelivery();
     }
 }
