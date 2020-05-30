@@ -11,15 +11,13 @@
             </div>
 
             <div class="col-9 card-body p-5 amber-text">
-                <h3 class="pull-right">@Model.Price</h3>
-                <h3>
-                    <a href="#">@Model.Name</a>
-                </h3>
-                <h4>@Model.ShortDescription</h4>
+                <h3>@Model.Name </h3>
                 <p>@Model.LongDescription</p>
-                <p class="button">
-                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-                       asp-route-cakeId="@Model.CakeId">Add to cart</a>
+                <h6>Алергии: @Model.AllergyInformation</h6>
+                <h3 class="pull-right">@Model.Price</h3>
+                <p class="button" style="width:260px">
+                    <a class="btn btn-primary" style="font-size:12px; font-weight:bold" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                       asp-route-cakeId="@Model.CakeId">Добави в количка</a>
                 </p>
             </div>
         </div>

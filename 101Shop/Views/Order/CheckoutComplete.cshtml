@@ -3,29 +3,11 @@
 <div id="Tracker" style="margin-top:110px;">
     <h1>Проследи своята поръчка в реално време.</h1>
     <ol class="progtrckr" id="ProgressTracker" data-progtrckr-steps="5">
-        <li class="progtrckr-done">Order Processing</li>
-        <!--
-        -->
-        <li class="progtrckr-done">Pre-Production</li>
-        <!--
-        -->
-        <li class="progtrckr-done">In Production</li>
-        <!--
-        -->
-        <li class="progtrckr-done">Shipped</li>
-        <!--
-        -->
-        <li class="progtrckr-todo">Delivered</li>
+        <li class="progtrckr-done">Обработка </li>
+        <li class="progtrckr-done">Поръчката е приета</li>
+        <li class="progtrckr-todo">Приготвяне</li>
+        <li class="progtrckr-todo">Доставяне</li>
+        <li class="progtrckr-todo">Завършена поръчка</li>
     </ol>
-</div>
+</div> 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        setInterval(function () {
-            $.get("/https://localhost:44358/Order/CheckoutComplete", {},
-                function (returnedHtml) {
-                    $("#Tracker").html(returnedHtml);
-                });
-        }, 1000);
-    });
-</script>

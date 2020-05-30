@@ -67,11 +67,17 @@ namespace _101Shop.Models
             _appDbContext.SaveChanges();
         }
 
-        public void EditCake(Cake cake) {
-            var editCake = _appDbContext.Cakes.FirstOrDefault(x => x.CakeId == cake.CakeId);
+        public void EditCake(CakeViewModel cake) {
+            var cakeToEdit = GetcakeById(cake.CakeId);
+            cakeToEdit.Name = cake.Name;
+            cakeToEdit.ShortDescription = cake.ShortDescription;
+            cakeToEdit.LongDescription = cake.LongDescription;
+            cakeToEdit.Price = cake.Price;
+            cakeToEdit.AllergyInformation = cake.AllergyInformation;
+            cakeToEdit.ImageUrl = cake.ImageUrl;
+            cakeToEdit.IsSpecial = cake.IsSpecial;
 
-            //editCake = cake;
-            //_appDbContext.SaveChanges();
+            _appDbContext.SaveChanges();
         }
 
     }

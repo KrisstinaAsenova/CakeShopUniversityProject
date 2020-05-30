@@ -21,12 +21,13 @@
                     <p class="card-text" style="color:firebrick">
                         Цена: @cake.Price
                     </p>
+                    <h6>@cake.ShortDescription</h6>
                     <div>
-                        <a asp-action="Details" asp-route-CakeId="@cake.CakeId">Details</a>
+                        <a asp-action="Details" asp-route-CakeId="@cake.CakeId">Детайли</a>
                     </div>
-                    <p class="button">
-                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-                           asp-route-CakeId="@cake.CakeId">Add to cart</a>
+                    <p class="button" style="width:240px">
+                        <a class="btn btn-primary" style="font-size:10px; font-weight:bold" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                           asp-route-CakeId="@cake.CakeId">Добави в количка</a>
                     </p>
                 </div>
 

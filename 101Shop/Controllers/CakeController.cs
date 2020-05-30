@@ -23,7 +23,6 @@ namespace _101Shop.Controllers
             return View();
         }
 
-        //Как се вика Create метода ???
         [HttpPost]
         public IActionResult Create(CakeViewModel vm)
         {
@@ -39,10 +38,9 @@ namespace _101Shop.Controllers
             return RedirectToAction(nameof(List));
         }
 
-        public IActionResult EditCake(int cakeId)
+        public IActionResult EditCake(CakeViewModel vm)
         {
-            //TODO call this method with CakeViewModel parameter
-            //var cakeToEdit = _cakeRepository.GetcakeById(cakeId);
+            _cakeRepository.EditCake(vm);
 
             return RedirectToAction(nameof(List));
         }

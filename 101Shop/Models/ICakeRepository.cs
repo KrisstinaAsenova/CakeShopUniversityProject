@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _101Shop.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace _101Shop.Models
 
         void RemoveCake(int cakeId);
 
-        void EditCake(Cake cake);
+        void EditCake(CakeViewModel cake);
 
         ICollection<Cake> GetAllCakes();
 
