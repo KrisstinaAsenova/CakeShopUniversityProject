@@ -10,8 +10,8 @@ using _101Shop.Models;
 namespace _101Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200529175723_initial")]
-    partial class initial
+    [Migration("20200603195909_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,16 +51,23 @@ namespace _101Shop.Migrations
                         new
                         {
                             Id = "771f568e-a7d5-496b-90c4-72ff997368e6",
-                            ConcurrencyStamp = "c8ea55ad-6dc2-4568-9b85-35bccfc17c96",
+                            ConcurrencyStamp = "8dce1dba-e056-42e1-bc97-fc647a2f7275",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "93c66dd9-11c5-4836-b104-a9c333549530",
-                            ConcurrencyStamp = "4d2a7da3-4f5d-4d7b-a0bd-4960122b2010",
+                            ConcurrencyStamp = "f49750ed-deb6-4154-8d36-6cb9f16628f4",
                             Name = "Cook",
                             NormalizedName = "COOK"
+                        },
+                        new
+                        {
+                            Id = "a7b8a4da-39e4-463c-abf1-4fd486b1876d",
+                            ConcurrencyStamp = "622febab-b097-4e7e-bdfb-8d5c614dcb30",
+                            Name = "Delivery",
+                            NormalizedName = "DELIVERY"
                         });
                 });
 
@@ -159,7 +166,12 @@ namespace _101Shop.Migrations
                         new
                         {
                             UserId = "565dfbc0-2681-4f29-bc97-a619eacf339c",
-                            RoleId = "771f568e-a7d5-496b-90c4-72ff997368e6"
+                            RoleId = "93c66dd9-11c5-4836-b104-a9c333549530"
+                        },
+                        new
+                        {
+                            UserId = "a4fe24ba-7c36-4069-a56c-6dac415b26ef",
+                            RoleId = "a7b8a4da-39e4-463c-abf1-4fd486b1876d"
                         });
                 });
 
@@ -197,7 +209,7 @@ namespace _101Shop.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("InStock")
+                    b.Property<bool>("IsSpecial")
                         .HasColumnType("bit");
 
                     b.Property<string>("LongDescription")
@@ -222,7 +234,7 @@ namespace _101Shop.Migrations
                             CakeId = 1,
                             AllergyInformation = "nqma",
                             ImageUrl = "/images/tikva.jpg",
-                            InStock = true,
+                            IsSpecial = false,
                             LongDescription = "Icing carrot cake mies.",
                             Name = "Apple Cake",
                             Price = 12.95m,
@@ -233,7 +245,7 @@ namespace _101Shop.Migrations
                             CakeId = 2,
                             AllergyInformation = "ima",
                             ImageUrl = "/images/shokolad.jpg",
-                            InStock = true,
+                            IsSpecial = false,
                             LongDescription = "Icing carrot e gummies.",
                             Name = "Blueberry Cheese Cake",
                             Price = 18.95m,
@@ -244,7 +256,7 @@ namespace _101Shop.Migrations
                             CakeId = 3,
                             AllergyInformation = "..malko",
                             ImageUrl = "/images/tikva.jpg",
-                            InStock = true,
+                            IsSpecial = false,
                             LongDescription = "Icinake dragée gummies.",
                             Name = "Cheese Cake",
                             Price = 18.95m,
@@ -255,7 +267,7 @@ namespace _101Shop.Migrations
                             CakeId = 4,
                             AllergyInformation = "..maasdadlko",
                             ImageUrl = "/images/shokolad.jpg",
-                            InStock = true,
+                            IsSpecial = false,
                             LongDescription = "Icinake dasdadragée gummies.",
                             Name = "Cheese Cake",
                             Price = 28.95m,
@@ -405,9 +417,6 @@ namespace _101Shop.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -429,15 +438,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8a062aa6-322c-4027-9ae8-ae05d3a1f1e8",
+                            ConcurrencyStamp = "81b9bd7a-9b14-45eb-9505-0e098db0b39f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGavU8xDgjLmqQQUG3EbG7p2bfvJKFUWuWwOopYC2jB6LyzxrERIjPKWNaSYuxOFOw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELzLZOt9emG/wDGLHdk29Ndiur56AVGq8IzrCujwiZe13qWvAVQ5CQpKVKAo8LmCVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "25914e69-a470-4639-a112-49833b72aaa3",
+                            SecurityStamp = "c976c6ac-e8fc-416d-b2b9-497c135d1130",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -445,29 +454,44 @@ namespace _101Shop.Migrations
                         {
                             Id = "565dfbc0-2681-4f29-bc97-a619eacf339c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "02d9d130-c0f7-4388-8cb2-05b933c9a8a9",
+                            ConcurrencyStamp = "86126767-0a97-4566-821d-d8caa1a88106",
                             Email = "cook@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "COOK@GMAIL.COM",
                             NormalizedUserName = "COOK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHxuMgIr4GlnYH0C5B1Qm4y09eM+qfW00MNMRKnswAP26g+fXVk5dCv3AgzgOsb/JQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELF7Gx99mV4FMrp/Xyny7L+xgDBXg2L89O42/eHklWjoYaZO+Nvz3e20Gww6w76WmA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fdb66701-9cc0-4c44-a47a-e03974902ce6",
+                            SecurityStamp = "c78b1e72-a2dd-4b6f-b44f-fafcd3a32b1f",
                             TwoFactorEnabled = false,
                             UserName = "cook"
                         },
                         new
                         {
+                            Id = "a4fe24ba-7c36-4069-a56c-6dac415b26ef",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "376e1d8c-8dad-4a27-9984-cbee5f852c7f",
+                            Email = "delivery@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "DELIVERY@GMAIL.COM",
+                            NormalizedUserName = "DELIVERY",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIhtozuIkRAe5ZAXad390OnAd4znR1puk1r8bWJWytdIP6ulAltJx7D8B7ChzIxrrA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "72b96b03-7876-4749-9be5-72f376be8f1e",
+                            TwoFactorEnabled = false,
+                            UserName = "delivery"
+                        },
+                        new
+                        {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8dde2a92-a07b-47e8-bd55-dd47b071203c",
+                            ConcurrencyStamp = "897977eb-4911-4926-95b2-28e6d1fe7661",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fa50f7ca-e956-4899-8edf-1d21b8372785",
-                            TwoFactorEnabled = false,
-                            Type = "Admin"
+                            SecurityStamp = "6e3db578-77a1-4f44-97b1-3e4a0faf07a5",
+                            TwoFactorEnabled = false
                         });
                 });
 

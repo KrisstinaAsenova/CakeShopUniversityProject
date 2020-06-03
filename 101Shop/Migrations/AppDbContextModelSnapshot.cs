@@ -49,21 +49,21 @@ namespace _101Shop.Migrations
                         new
                         {
                             Id = "771f568e-a7d5-496b-90c4-72ff997368e6",
-                            ConcurrencyStamp = "ed89c5bf-fdba-4ede-9a6d-2dac11d2dbdc",
+                            ConcurrencyStamp = "0bedbb64-cdb7-44fb-b397-c6a284343fbb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "93c66dd9-11c5-4836-b104-a9c333549530",
-                            ConcurrencyStamp = "bfe56098-0f41-4832-9408-6d40b19054ff",
+                            ConcurrencyStamp = "4cc4160f-7f68-4379-814f-a11c5cc46533",
                             Name = "Cook",
                             NormalizedName = "COOK"
                         },
                         new
                         {
                             Id = "a7b8a4da-39e4-463c-abf1-4fd486b1876d",
-                            ConcurrencyStamp = "429f33c7-eccb-428c-8923-472b447f4deb",
+                            ConcurrencyStamp = "c286f45c-76ec-408b-914f-457d8a0dd74d",
                             Name = "Delivery",
                             NormalizedName = "DELIVERY"
                         });
@@ -436,15 +436,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "97cb4c3c-c12a-4dec-bad6-d078710e90be",
+                            ConcurrencyStamp = "78c4a2f2-0e23-4609-a2f0-044e60d0fb90",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAELpm5OrZ4Oi+39gkkKoSDAxTuS6vdu2zDEdcCTFZVbbN1UbjGCecU2me5EaSUY+j9A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMC1fFVC/SQx/2Br6T0IUOUHVmcchfPsQqztOExwqC84wYLhHpbddLNaPCbtoxNRWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "45e5e617-261f-4e68-b335-524cb01793d2",
+                            SecurityStamp = "b9f9dcb2-1451-4be5-be73-ffd5e42a272b",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -452,15 +452,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "565dfbc0-2681-4f29-bc97-a619eacf339c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a374d835-ebb3-4e39-84f7-6995ac1100f5",
+                            ConcurrencyStamp = "bb202fa1-2358-4990-ac46-9522b8a7fa14",
                             Email = "cook@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "COOK@GMAIL.COM",
                             NormalizedUserName = "COOK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHNXq7IKsMCVqLn8GJunheUugpt/YcGkC4tla7P69GFCD+b9NtNRpHj0jgO3hjRkeg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFegpBsBOW0VKQ4j1XQkAsdjfwFrOIGRC373/nz/mLoZLwPOOoz9UX1yvaxi2i+O3g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "efeb68fe-e906-4feb-a9cc-dfe9ff305eb0",
+                            SecurityStamp = "50aa0953-2c09-4c24-9d6e-55cb85afbbd6",
                             TwoFactorEnabled = false,
                             UserName = "cook"
                         },
@@ -468,15 +468,15 @@ namespace _101Shop.Migrations
                         {
                             Id = "a4fe24ba-7c36-4069-a56c-6dac415b26ef",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "21aca02b-3d2a-475b-b231-d28c16e7c606",
+                            ConcurrencyStamp = "2e1fb04e-54f6-4394-a3f0-f9451ee1350e",
                             Email = "delivery@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "DELIVERY@GMAIL.COM",
                             NormalizedUserName = "DELIVERY",
-                            PasswordHash = "AQAAAAEAACcQAAAAENN73zqKIoBap3hED3x1tk/JQ3zHG88b0LrCod37Nekpzro4JQb4SI19RIz/WBJ0og==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPbAua0CMS0YMdIzQqlPzyrLLUqUAdE519MrgqFV91TKIsmj/P0sSvdLsaaTlh2iiA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b4077980-1bba-43fc-9703-6d0f091c0c63",
+                            SecurityStamp = "6cb23269-0eef-4af6-b73b-26babea678a4",
                             TwoFactorEnabled = false,
                             UserName = "delivery"
                         },
@@ -484,11 +484,11 @@ namespace _101Shop.Migrations
                         {
                             Id = "123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0ac3a68-bafd-4b28-a60b-323b54f69734",
+                            ConcurrencyStamp = "270157b6-79e6-4be3-bf3b-d3b016cf3b4b",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "973f734a-b0bc-45ab-8db8-5e4f8561b565",
+                            SecurityStamp = "4ba263af-5826-48aa-b4af-14410b6fbf50",
                             TwoFactorEnabled = false
                         });
                 });
