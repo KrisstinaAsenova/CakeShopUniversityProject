@@ -37,14 +37,18 @@ namespace _101Shop.Controllers
 
         public RedirectToActionResult AddToShoppingCart(int cakeId)
         {
-            var selectedcake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
+            var cake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
 
-            if (selectedcake != null)
+            _shoppingCart.AddToCart(cake, 1);
+
+            if (cake.IsSpecial)
             {
-                _shoppingCart.AddToCart(selectedcake, 1);
+                return RedirectToAction("Specials", "Cake");
             }
-            //TODO
-            return RedirectToAction("List","Cake");
+            else
+            {
+                return RedirectToAction("List", "Cake");
+            }
         }
 
         public RedirectToActionResult RemoveFromShoppingCart(int cakeId)

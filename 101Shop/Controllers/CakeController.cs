@@ -33,16 +33,32 @@ namespace _101Shop.Controllers
 
         public IActionResult Remove(int cakeId)
         {
+            var cake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
             _cakeRepository.RemoveCake(cakeId);
 
-            return RedirectToAction(nameof(List));
+            if (cake.IsSpecial)
+            {
+                return RedirectToAction("Specials", "Cake");
+            }
+            else
+            {
+                return RedirectToAction("List", "Cake");
+            }
         }
 
         public IActionResult EditCake(CakeViewModel vm)
         {
+            var cake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == vm.CakeId);
             _cakeRepository.EditCake(vm);
 
-            return RedirectToAction(nameof(List));
+            if (cake.IsSpecial)
+            {
+                return RedirectToAction("Specials", "Cake");
+            }
+            else
+            {
+                return RedirectToAction("List", "Cake");
+            }
         }
 
         [HttpGet]
@@ -102,6 +118,7 @@ namespace _101Shop.Controllers
             {
                 CakeId = cake.CakeId,
                 Name = cake.Name,
+                AllergyInformation = cake.AllergyInformation,
                 ShortDescription = cake.ShortDescription,
                 LongDescription = cake.LongDescription,
                 Price = cake.Price,
