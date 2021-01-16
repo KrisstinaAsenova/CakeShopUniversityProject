@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using _101Shop.Models;
 using _101Shop.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 
 namespace _101Shop.Controllers
 {
@@ -40,7 +39,6 @@ namespace _101Shop.Controllers
         public IActionResult AddComment(CakeViewModel vm)
         {
             var user = _userManager.GetUserAsync(User);
-            var userId = _userManager.GetUserId(User);
             var comment = new Comment()
             {
                 CakeId = vm.CakeId,
@@ -49,7 +47,7 @@ namespace _101Shop.Controllers
             };
             var model = _cakeRepository.AddComment(comment);
 
-            return RedirectToAction(nameof(Details), routeValues: vm.CakeId);
+            return RedirectToAction(nameof(Details), new { cakeId = vm.CakeId });
         }
 
         public IActionResult Remove(int cakeId)

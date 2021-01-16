@@ -48,16 +48,7 @@ namespace _101Shop.Models
         public Cake GetcakeById(int cakeId)
         {
             var cake = _appDbContext.Cakes.FirstOrDefault(cake => cake.CakeId == cakeId);
-            var comments = _appDbContext.Comments.Where(c => c.CakeId == cakeId).ToList();            
-
-            foreach(var c in comments)
-            {
-                //var test = new User();
-                //test.Id = c.UserName;
-                //test.UserName = _appDbContext.Users.FirstOrDefault(u => u.Id == c.UserName).UserName;
-                //c.User = test;
-            }
-
+            var comments = _appDbContext.Comments.Where(c => c.CakeId == cakeId).ToList();   
 
             cake.Comments = comments;
             return cake;
@@ -96,11 +87,6 @@ namespace _101Shop.Models
 
         public Comment AddComment(Comment comment)
         {
-            //var cake = this._appDbContext.Cakes.FirstOrDefault(x => x.CakeId == comment.CakeId);
-            //if (cake.Comments == null)
-            //{
-            //    cake.Comments = new List<Comment>();
-            //}
             _appDbContext.Comments.Add(comment);
             _appDbContext.SaveChanges();
             return comment;
@@ -108,7 +94,6 @@ namespace _101Shop.Models
 
         public Comment GetComments(Comment comment)
         {
-            //var 
             _appDbContext.Comments.Add(comment);
             _appDbContext.SaveChanges();
             return comment;
