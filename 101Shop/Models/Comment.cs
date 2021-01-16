@@ -15,7 +15,7 @@ namespace _101Shop.Models
         public virtual Cake Cake { get; set; }
         public int CakeId { get; set; }
         public virtual User User { get; set; }
-        public string UserId { get; set; }
+        public string UserName { get; set; }
         public string Text { get; set; }
 
     }

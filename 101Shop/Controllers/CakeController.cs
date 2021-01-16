@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using _101Shop.Models;
 using _101Shop.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace _101Shop.Controllers
 {
     public class CakeController : Controller
     {
         private readonly ICakeRepository _cakeRepository;
+        private readonly UserManager<User> _userManager;
 
-        public CakeController(ICakeRepository cakeRepository)
+        public CakeController(ICakeRepository cakeRepository, UserManager<User> userManager)
         {
             _cakeRepository = cakeRepository;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -36,16 +39,17 @@ namespace _101Shop.Controllers
         [HttpPost]
         public IActionResult AddComment(CakeViewModel vm)
         {
-            var test = User. Identity.Name;
+            var user = _userManager.GetUserAsync(User);
+            var userId = _userManager.GetUserId(User);
             var comment = new Comment()
             {
                 CakeId = vm.CakeId,
-                UserId = test,
+                UserName = user.Result.UserName,
                 Text = vm.Text
             };
             var model = _cakeRepository.AddComment(comment);
 
-            return RedirectToAction(nameof(Details), vm.CakeId);
+            return RedirectToAction(nameof(Details), routeValues: vm.CakeId);
         }
 
         public IActionResult Remove(int cakeId)
