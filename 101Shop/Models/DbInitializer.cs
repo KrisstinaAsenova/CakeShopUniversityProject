@@ -72,7 +72,7 @@ namespace _101Shop.Models
             var comment = new Comment
             {
                 CakeId = 1,
-                UserId = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
+                UserName = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
                 Text = "test123",
                 CommentId = 1
             };
