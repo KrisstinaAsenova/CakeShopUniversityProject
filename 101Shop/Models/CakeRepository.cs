@@ -36,7 +36,8 @@ namespace _101Shop.Models
                 Price = price,
                 AllergyInformation = allergyInformation,
                 ImageUrl = imageURL,
-                IsSpecial = isSpecial
+                IsSpecial = isSpecial,
+                Comments = new List<Comment>()
             };
             _appDbContext.Cakes.Add(cake);
             _appDbContext.SaveChanges();
@@ -46,6 +47,8 @@ namespace _101Shop.Models
         public Cake GetcakeById(int cakeId)
         {
             var cake = _appDbContext.Cakes.FirstOrDefault(cake => cake.CakeId == cakeId);
+            var comments = _appDbContext.Comments.Where(c => c.CakeId == cakeId).ToList();
+            cake.Comments = comments;
             return cake;
         }
 
@@ -78,6 +81,18 @@ namespace _101Shop.Models
             cakeToEdit.IsSpecial = cake.IsSpecial;
 
             _appDbContext.SaveChanges();
+        }
+
+        public Comment AddComment(Comment comment)
+        {
+            //var cake = this._appDbContext.Cakes.FirstOrDefault(x => x.CakeId == comment.CakeId);
+            //if (cake.Comments == null)
+            //{
+            //    cake.Comments = new List<Comment>();
+            //}
+            _appDbContext.Comments.Add(comment);
+            _appDbContext.SaveChanges();
+            return comment;
         }
 
     }

@@ -14,6 +14,8 @@ namespace _101Shop.Models
 
         Cake Create(string name, string shortDesc, string longDesc, decimal price, string allergyInformation, string imageURL, bool isSpecial);
 
+        Comment AddComment(Comment comment);
+
         void RemoveCake(int cakeId);
 
         void EditCake(CakeViewModel cake);

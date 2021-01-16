@@ -17,5 +17,7 @@ namespace _101Shop.Models
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public bool IsSpecial { get; set; }
+        public List<Comment> Comments { get; set; }
+
     }
 }

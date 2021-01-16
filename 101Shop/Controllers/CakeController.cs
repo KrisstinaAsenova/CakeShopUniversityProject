@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using _101Shop.Models;
 using _101Shop.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace _101Shop.Controllers
 {
@@ -29,6 +30,22 @@ namespace _101Shop.Controllers
             var model = _cakeRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price, vm.AllergyInformation, vm.ImageUrl, vm.IsSpecial);
 
             return RedirectToAction(nameof(Create));
+        }
+
+        
+        [HttpPost]
+        public IActionResult AddComment(CakeViewModel vm)
+        {
+            var test = User. Identity.Name;
+            var comment = new Comment()
+            {
+                CakeId = vm.CakeId,
+                UserId = test,
+                Text = vm.Text
+            };
+            var model = _cakeRepository.AddComment(comment);
+
+            return RedirectToAction(nameof(Details), vm.CakeId);
         }
 
         public IActionResult Remove(int cakeId)
@@ -122,6 +139,8 @@ namespace _101Shop.Controllers
                 ShortDescription = cake.ShortDescription,
                 LongDescription = cake.LongDescription,
                 Price = cake.Price,
+                ImageUrl = cake.ImageUrl,
+                Comments = cake.Comments
             };
             return View(test);
         }

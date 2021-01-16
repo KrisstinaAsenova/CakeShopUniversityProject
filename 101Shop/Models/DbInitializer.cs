@@ -56,6 +56,8 @@ namespace _101Shop.Models
 
             //builder.Entity<Category>().HasData(category1, category2, category3);
 
+           
+            
             var cake1 = new Cake
             {
                 CakeId = 1,
@@ -64,8 +66,18 @@ namespace _101Shop.Models
                 ShortDescription = "Our famous apple cakes!",
                 LongDescription = "Icing carrot cake mies.",
                 AllergyInformation = "nqma",
-                ImageUrl = "/images/tikva.jpg"
+                ImageUrl = "/images/tikva.jpg",
             };
+
+            var comment = new Comment
+            {
+                CakeId = 1,
+                UserId = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
+                Text = "test123",
+                CommentId = 1
+            };
+            builder.Entity<Comment>().HasData(comment);
+            //cake1.Comments = test;
 
             var cake2 = new Cake
             {
@@ -105,7 +117,7 @@ namespace _101Shop.Models
             var user = new User { Id = "123" };
             builder.Entity<User>().HasData(user);
 
-
+            
         }
     }
 }

@@ -10,6 +10,6 @@ namespace _101Shop.Models
     [Table("AspNetUsers")]
     public class User : IdentityUser
     {
-
+        public List<Comment> Comments { get; set; }
     }
 }

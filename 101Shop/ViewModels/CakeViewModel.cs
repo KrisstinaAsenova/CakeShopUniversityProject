@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _101Shop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,5 +16,7 @@ namespace _101Shop.ViewModels
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public bool IsSpecial { get; set; }
+        public List<Comment> Comments { get; set; }
+        public string Text { get; set; }
     }
 }
