@@ -96,7 +96,7 @@ namespace _101Shop.Models
 
             var cake5 = new Cake
             {
-                CakeId = 1,
+                CakeId = 5,
                 Name = "Коледно кексче",
                 Price = 12.95M,
                 ShortDescription = "Коледно чудо!",
@@ -108,7 +108,7 @@ namespace _101Shop.Models
 
             var cake6 = new Cake
             {
-                CakeId = 2,
+                CakeId = 6,
                 Name = "Фирмена торта",
                 Price = 18.95M,
                 ShortDescription = "За вашия фирмен банкет!",
@@ -120,7 +120,7 @@ namespace _101Shop.Models
 
             var cake7 = new Cake
             {
-                CakeId = 3,
+                CakeId = 7,
                 Name = "Торта за кръщене",
                 Price = 18.95M,
                 ShortDescription = "",
@@ -132,7 +132,7 @@ namespace _101Shop.Models
 
             var cake8 = new Cake
             {
-                CakeId = 4,
+                CakeId = 8,
                 Name = "Сватбена торта",
                 Price = 28.95M,
                 ShortDescription = "Честито!",
