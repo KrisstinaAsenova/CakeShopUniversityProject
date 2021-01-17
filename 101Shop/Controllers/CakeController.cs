@@ -44,7 +44,7 @@ namespace _101Shop.Controllers
                 CakeId = vm.CakeId,
                 UserName = _userManager.GetUserAsync(User).Result.UserName,
                 Text = vm.Text,
-                Date = DateTime.Now
+                Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
             var model = await Task.Run(() => _cakeRepository.AddComment(comment));
 
