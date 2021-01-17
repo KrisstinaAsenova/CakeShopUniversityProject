@@ -1,5 +1,4 @@
-﻿using _101Shop.Models;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _101Shop.Data
+namespace _101Shop.Models
 {
     public static class DbInitializer
     {
@@ -51,53 +50,35 @@ namespace _101Shop.Data
                     UserId = delivery.Id
                 });
 
-            //var category1 = new Category { CategoryId = 114, CategoryName = "Fruit cakes", Description = "All-fruity cakes" };
-            //var category2 = new Category { CategoryId = 112, CategoryName = "Cheese cakes", Description = "Cheesy all the way" };
-            //var category3 = new Category { CategoryId = 113, CategoryName = "Seasonal cakes", Description = "Get in the mood for a seasonal cake" };
-
-            //builder.Entity<Category>().HasData(category1, category2, category3);
-
-
-
             var cake1 = new Cake
             {
                 CakeId = 1,
-                Name = "Apple Cake",
+                Name = "Бананов кексче",
                 Price = 12.95M,
-                ShortDescription = "Our famous apple cakes!",
-                LongDescription = "Icing carrot cake mies.",
+                ShortDescription = "Нашия известен ябълков кекс!",
+                LongDescription = "Нещо като рецепта.",
                 AllergyInformation = "nqma",
-                ImageUrl = "/images/tikva.jpg",
+                ImageUrl = "/images/banana.jpg",
             };
-
-            var comment = new Comment
-            {
-                CakeId = 1,
-                UserName = "fe86f129-41f3-4ab8-a61c-5f47239a1393",
-                Text = "test123",
-                CommentId = 1
-            };
-            builder.Entity<Comment>().HasData(comment);
-            //cake1.Comments = test;
 
             var cake2 = new Cake
             {
                 CakeId = 2,
-                Name = "Blueberry Cheese Cake",
+                Name = "Шоколадово кексче",
                 Price = 18.95M,
-                ShortDescription = "You'll love it!",
-                LongDescription = "Icing carrot e gummies.",
-                AllergyInformation = "ima",
+                ShortDescription = "Много ще ви хареса!",
+                LongDescription = "Нещо като рецепта.",
+                AllergyInformation = "",
                 ImageUrl = "/images/shokolad.jpg"
             };
 
             var cake3 = new Cake
             {
                 CakeId = 3,
-                Name = "Cheese Cake",
+                Name = "Тиквено кексче",
                 Price = 18.95M,
-                ShortDescription = "Plain cheese cake. Plain pleasure.",
-                LongDescription = "Icinake dragée gummies.",
+                ShortDescription = "Чисто удоволствие.",
+                LongDescription = "Нещо като рецепта.",
                 AllergyInformation = "..malko",
                 ImageUrl = "/images/tikva.jpg"
             };
@@ -105,15 +86,63 @@ namespace _101Shop.Data
             var cake4 = new Cake
             {
                 CakeId = 4,
-                Name = "Cheese Cake",
+                Name = "Брауни",
                 Price = 28.95M,
-                ShortDescription = "Plain cheese cacasdasdke. Plain pleasure.",
-                LongDescription = "Icinake dasdadragée gummies.",
-                AllergyInformation = "..maasdadlko",
-                ImageUrl = "/images/shokolad.jpg"
+                ShortDescription = "Сладко десертче.",
+                LongDescription = "Нещо като рецепта.",
+                AllergyInformation = "",
+                ImageUrl = "/images/brw.jpg"
             };
 
-            builder.Entity<Cake>().HasData(cake1, cake2, cake3, cake4);
+            var cake5 = new Cake
+            {
+                CakeId = 1,
+                Name = "Коледно кексче",
+                Price = 12.95M,
+                ShortDescription = "Коледно чудо!",
+                LongDescription = "Нещо като рецепта.",
+                AllergyInformation = "nqma",
+                ImageUrl = "/images/christmas.jpg",
+                IsSpecial = true
+            };
+
+            var cake6 = new Cake
+            {
+                CakeId = 2,
+                Name = "Фирмена торта",
+                Price = 18.95M,
+                ShortDescription = "За вашия фирмен банкет!",
+                LongDescription = "Нещо като рецепта.",
+                AllergyInformation = "",
+                ImageUrl = "/images/firm.jpg",
+                IsSpecial = true
+            };
+
+            var cake7 = new Cake
+            {
+                CakeId = 3,
+                Name = "Торта за кръщене",
+                Price = 18.95M,
+                ShortDescription = "",
+                LongDescription = "Нещо като рецепта.",
+                AllergyInformation = "..",
+                ImageUrl = "/images/krushtene.jpg",
+                IsSpecial = true
+            };
+
+            var cake8 = new Cake
+            {
+                CakeId = 4,
+                Name = "Сватбена торта",
+                Price = 28.95M,
+                ShortDescription = "Честито!",
+                LongDescription = "Нещо като рецепта.",
+                AllergyInformation = "",
+                ImageUrl = "/images/Svatbena.jpg",
+                IsSpecial = true
+            };
+
+            builder.Entity<Cake>().HasData(cake1, cake2, cake3, cake4, cake5, cake6, cake7, cake8);
 
             var user = new User { Id = "123" };
             builder.Entity<User>().HasData(user);
