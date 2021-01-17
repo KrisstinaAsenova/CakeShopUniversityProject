@@ -4,8 +4,6 @@ using _101Shop.Services.Contracts;
 using _101Shop.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,13 +26,12 @@ namespace _101Shop.Controllers
             return View();
         }
 
-
         [HttpPost]
         [Authorize]
-        public IActionResult Checkout(Order order)
+        public async Task<IActionResult> Checkout(Order order)
         {
-            var items = _shoppingCart.GetShoppingCartItems();
-            _shoppingCart.ShoppingCartItems = items;
+            var items = await Task.Run(() => _shoppingCart.GetShoppingCartItems());
+            await Task.Run(() => _shoppingCart.ShoppingCartItems = items);
 
             if (_shoppingCart.ShoppingCartItems.Count == 0)
             {
@@ -43,10 +40,11 @@ namespace _101Shop.Controllers
 
             if (ModelState.IsValid)
             {
-                _orderRepository.CreateOrder(order);
-                _shoppingCart.ClearCart();
+                await Task.Run(() => _orderRepository.CreateOrder(order));
+                await Task.Run(() => _shoppingCart.ClearCart());
                 return RedirectToAction("CheckoutComplete");
             }
+
             return View(order);
         }
 
@@ -57,9 +55,9 @@ namespace _101Shop.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListOrders()
+        public async Task<IActionResult> ListOrders()
         {
-            var orders = _orderRepository.GetAllOrders();
+            var orders = await Task.Run(() => _orderRepository.GetAllOrders());
             var test = orders.Select(order => new OrderDetailViewModel
             {
                 CakeId = order.CakeId,
@@ -71,9 +69,9 @@ namespace _101Shop.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListOrdersForDelivery()
+        public async Task<IActionResult> ListOrdersForDelivery()
         {
-            var orders = _orderRepository.GetAllOrdersForDelivery();
+            var orders = await Task.Run(() => _orderRepository.GetAllOrdersForDelivery());
             var test = orders.Select(order => new OrderViewModel
             {
                 OrderId = order.OrderId,

@@ -19,13 +19,13 @@ namespace _101Shop.Services
             _shoppingCart = shoppingCart;
         }
 
-        public void CreateOrder(Order order)
+        public async Task CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
-            order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+            order.OrderTotal = await Task.Run(() => _shoppingCart.GetShoppingCartTotal());
 
-            _appDbContext.Orders.Add(order);
-            _appDbContext.SaveChanges();
+            await Task.Run(() => _appDbContext.Orders.Add(order));
+            await Task.Run(() => _appDbContext.SaveChanges());
 
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
 
@@ -39,24 +39,20 @@ namespace _101Shop.Services
                     Price = shoppingCartItem.Cake.Price
                 };
 
-                _appDbContext.OrderDetails.Add(orderDetail);
+                await Task.Run(() => _appDbContext.OrderDetails.Add(orderDetail));
             }
 
-            _appDbContext.SaveChanges();
+            await Task.Run(() => _appDbContext.SaveChanges());
         }
 
-        public ICollection<OrderDetail> GetAllOrders()
+        public async Task<ICollection<OrderDetail>> GetAllOrders()
         {
-            var orders = _appDbContext.OrderDetails.ToList();
-
-            return orders;
+            return await Task.Run(() => _appDbContext.OrderDetails.ToList());
         }
 
-        public ICollection<Order> GetAllOrdersForDelivery()
+        public async Task<ICollection<Order>> GetAllOrdersForDelivery()
         {
-            var orders = _appDbContext.Orders.ToList();
-
-            return orders;
+            return await Task.Run(() => _appDbContext.Orders.ToList());
         }
     }
 }
