@@ -53,11 +53,11 @@ namespace _101Shop.Models
             var cake1 = new Cake
             {
                 CakeId = 1,
-                Name = "Бананов кексче",
+                Name = "Бананово кексче",
                 Price = 12.95M,
                 ShortDescription = "Нашия известен ябълков кекс!",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "nqma",
+                AllergyInformation = "няма",
                 ImageUrl = "/images/banana.jpg",
             };
 
@@ -68,7 +68,7 @@ namespace _101Shop.Models
                 Price = 18.95M,
                 ShortDescription = "Много ще ви хареса!",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "",
+                AllergyInformation = "няма",
                 ImageUrl = "/images/shokolad.jpg"
             };
 
@@ -79,7 +79,7 @@ namespace _101Shop.Models
                 Price = 18.95M,
                 ShortDescription = "Чисто удоволствие.",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "..malko",
+                AllergyInformation = "няма",
                 ImageUrl = "/images/tikva.jpg"
             };
 
@@ -90,7 +90,7 @@ namespace _101Shop.Models
                 Price = 28.95M,
                 ShortDescription = "Сладко десертче.",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "",
+                AllergyInformation = "няма",
                 ImageUrl = "/images/brw.jpg"
             };
 
@@ -101,7 +101,7 @@ namespace _101Shop.Models
                 Price = 12.95M,
                 ShortDescription = "Коледно чудо!",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "nqma",
+                AllergyInformation = "няма",
                 ImageUrl = "/images/christmas.jpg",
                 IsSpecial = true
             };
@@ -113,7 +113,7 @@ namespace _101Shop.Models
                 Price = 18.95M,
                 ShortDescription = "За вашия фирмен банкет!",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "",
+                AllergyInformation = "няма",
                 ImageUrl = "/images/firm.jpg",
                 IsSpecial = true
             };
@@ -125,7 +125,7 @@ namespace _101Shop.Models
                 Price = 18.95M,
                 ShortDescription = "",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "..",
+                AllergyInformation = "",
                 ImageUrl = "/images/krushtene.jpg",
                 IsSpecial = true
             };
@@ -137,7 +137,7 @@ namespace _101Shop.Models
                 Price = 28.95M,
                 ShortDescription = "Честито!",
                 LongDescription = "Нещо като рецепта.",
-                AllergyInformation = "",
+                AllergyInformation = "няма",
                 ImageUrl = "/images/Svatbena.jpg",
                 IsSpecial = true
             };

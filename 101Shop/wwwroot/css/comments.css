@@ -34,7 +34,8 @@
     background-color: transparent;
     border: none;
     position: relative;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
+    width: 700px;
 }
 
 .comments .commenter-pic {

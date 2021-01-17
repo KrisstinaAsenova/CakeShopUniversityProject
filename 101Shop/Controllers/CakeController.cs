@@ -46,7 +46,11 @@ namespace _101Shop.Controllers
                 Text = vm.Text,
                 Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
-            var model = await Task.Run(() => _cakeRepository.AddComment(comment));
+            if (!string.IsNullOrEmpty(comment.Text))
+            {
+                var model = await Task.Run(() => _cakeRepository.AddComment(comment));
+            }
+            
 
             return RedirectToAction(nameof(Details), new { cakeId = vm.CakeId });
         }

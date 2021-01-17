@@ -3,20 +3,28 @@
 <link href="~/css/detail.css" rel="stylesheet" type="text/css">
 <link href="~/css/comments.css" rel="stylesheet" type="text/css">
 
+<style>
+    textarea {
+        width: 1000px;
+        height: 120px;
+        resize: none;
+    }
+</style>
+
 <div class="container">
     <div class="card border-0 shadow my-5">
-        <div class="row">
-            <div class="col-sm-6">
+        <div class="col">
+            <div class="row-sm-6">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4" style="align-self:center; padding-left:15px">
-                            <img style="width: 170px; height: 200px; padding-top:5px" alt="@Model.Name" src="@Model.ImageUrl">
+                            <img style="width: 200px; height: 200px; padding-top:5px" alt="@Model.Name" src="@Model.ImageUrl">
                         </div>
 
                         <div class="col-sm-8 card-body amber-text">
                             <h3>@Model.Name </h3>
                             <p>@Model.LongDescription</p>
-                            <h6>Алергии: @Model.AllergyInformation</h6>
+                            <h6>Алергени: @Model.AllergyInformation</h6>
                             <h3 class="pull-right">@Model.Price</h3>
                             <p class="button" style="width:260px">
                                 <a class="btn btn-primary" style="font-size:12px; font-weight:bold" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
@@ -30,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="row-sm-6">
                 <hr />
                 <div class="row">
                     <div>
@@ -38,12 +46,12 @@
                             <div class="col-12">
                                 <div class="comments">
                                     <div class="comment-box add-comment">
-                                        <form asp-action="AddComment" style="width: 479.5px; height:38px">
+                                        <form asp-action="AddComment" style="height:50px" id="usrform">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                             <input type="hidden" asp-for="@Model.CakeId" />
 
                                             <div class="form-group">
-                                                <input asp-for="Text" class="form-control" placeholder="Добави коментар" />
+                                                <textarea  asp-for="Text" class="form-control" form="usrform" placeholder="Добави коментар"></textarea>
                                             </div>
 
                                             <div class="form-group">
@@ -53,13 +61,11 @@
                                     </div>                                    
                                     @foreach (var comment in Model.Comments)
                                     {
-                                        <div class="comment-box">
+                                        <div class="comment-box" >
 
-                                            <span class="commenter-name">
-                                                <a href="#">@comment.UserName</a> <span class="comment-time">@comment.Date</span>
-                                            </span>
+                                                <p class="comment-txt more">@comment.UserName: @comment.Date</p>
 
-                                            <p lass="comment-txt more">@comment.Text</p>
+                                        <textarea readonly="readonly" class="form-control">@comment.Text</textarea>
                                         </div>
                                     }
                                 </div>
