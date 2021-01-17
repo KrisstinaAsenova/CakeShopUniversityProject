@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using _101Shop.Models;
 using _101Shop.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using _101Shop.Services.Contracts;
 
 namespace _101Shop.Controllers
 {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _101Shop.Models
+namespace _101Shop.Data
 {
     public class AppDbContext : IdentityDbContext<User>
     {

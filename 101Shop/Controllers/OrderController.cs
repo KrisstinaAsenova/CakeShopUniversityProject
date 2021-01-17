@@ -1,4 +1,6 @@
 ﻿using _101Shop.Models;
+using _101Shop.Services;
+using _101Shop.Services.Contracts;
 using _101Shop.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _101Shop.Data;
+using _101Shop.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace _101Shop.Models
+namespace _101Shop.Services
 {
     public class ShoppingCart
     {
