@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace _101Shop.Models
 {
@@ -11,6 +12,7 @@ namespace _101Shop.Models
         public virtual User User { get; set; }
         public string UserName { get; set; }
         public string Text { get; set; }
+        public DateTime Date { get; set; }
 
     }
 }
