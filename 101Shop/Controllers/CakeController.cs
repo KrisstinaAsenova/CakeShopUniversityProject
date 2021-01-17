@@ -44,7 +44,8 @@ namespace _101Shop.Controllers
             {
                 CakeId = vm.CakeId,
                 UserName = user.Result.UserName,
-                Text = vm.Text
+                Text = vm.Text,
+                Date = DateTime.Now
             };
             var model = _cakeRepository.AddComment(comment);
 
