@@ -123,7 +123,7 @@ namespace _101Shop.Models
                 CakeId = 7,
                 Name = "Торта за кръщене",
                 Price = 18.95M,
-                ShortDescription = "",
+                ShortDescription = " ",
                 LongDescription = "Нещо като рецепта.",
                 AllergyInformation = "",
                 ImageUrl = "/images/krushtene.jpg",
@@ -143,11 +143,6 @@ namespace _101Shop.Models
             };
 
             builder.Entity<Cake>().HasData(cake1, cake2, cake3, cake4, cake5, cake6, cake7, cake8);
-
-            var user = new User { Id = "123" };
-            builder.Entity<User>().HasData(user);
-
-
         }
     }
 }

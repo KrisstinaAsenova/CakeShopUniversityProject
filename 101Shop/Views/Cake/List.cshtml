@@ -37,10 +37,13 @@
                                 </a>
                             </div>
                         }
+                        @if (!User.IsInRole("Admin") && !User.IsInRole("Cook") && !User.IsInRole("Delivery"))
+                        {
                         <p class="button" style="width:240px">
                             <a class="btn btn-primary" style="font-size:10px; font-weight:bold" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
                                asp-route-CakeId="@cake.CakeId">Добави в количка</a>
                         </p>
+                        }
                     </div>
                 </div>
 

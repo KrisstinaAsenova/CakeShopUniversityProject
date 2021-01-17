@@ -26,10 +26,13 @@
                             <p>@Model.LongDescription</p>
                             <h6>Алергени: @Model.AllergyInformation</h6>
                             <h3 class="pull-right">@Model.Price</h3>
-                            <p class="button" style="width:260px">
-                                <a class="btn btn-primary" style="font-size:12px; font-weight:bold" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-                                   asp-route-cakeId="@Model.CakeId">Добави в количка</a>
-                            </p>
+                            @if (!User.IsInRole("Admin") && !User.IsInRole("Cook") && !User.IsInRole("Delivery"))
+                            {
+                                <p class="button" style="width:260px">
+                                    <a class="btn btn-primary" style="font-size:12px; font-weight:bold" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                                       asp-route-cakeId="@Model.CakeId">Добави в количка</a>
+                                </p>
+                            }
 
                             <div>
                                 <a href="javascript:history.go(-1)" title="Returns you back to the previous page.">Назад</a>
@@ -44,28 +47,31 @@
                     <div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="comments">
-                                    <div class="comment-box add-comment">
-                                        <form asp-action="AddComment" style="height:50px" id="usrform">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <input type="hidden" asp-for="@Model.CakeId" />
+                                <div class="comments ">
+                                    @if (!User.IsInRole("Admin") && !User.IsInRole("Cook") && !User.IsInRole("Delivery"))
+                                    {
+                                        <div class="comment-box add-comment">
+                                            <form asp-action="AddComment" style="height:50px" id="usrform">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <input type="hidden" asp-for="@Model.CakeId" />
 
-                                            <div class="form-group">
-                                                <textarea  asp-for="Text" class="form-control" form="usrform" placeholder="Добави коментар"></textarea>
-                                            </div>
+                                                <div class="form-group">
+                                                    <textarea asp-for="Text" class="form-control" form="usrform" placeholder="Добави коментар"></textarea>
+                                                </div>
 
-                                            <div class="form-group">
-                                                <input type="submit" value="Добави" class="btn btn-primary" />
-                                            </div>
-                                        </form>
-                                    </div>                                    
+                                                <div class="form-group">
+                                                    <input type="submit" value="Добави" class="btn btn-primary" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    }
                                     @foreach (var comment in Model.Comments)
                                     {
-                                        <div class="comment-box" >
+                                        <div class="comment-box">
 
-                                                <p class="comment-txt more">@comment.UserName: @comment.Date</p>
+                                            <p class="comment-txt more">@comment.UserName: @comment.Date</p>
 
-                                        <textarea readonly="readonly" class="form-control">@comment.Text</textarea>
+                                            <textarea readonly="readonly" class="form-control">@comment.Text</textarea>
                                         </div>
                                     }
                                 </div>
