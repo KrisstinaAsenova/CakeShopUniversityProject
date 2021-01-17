@@ -2,15 +2,9 @@
 using _101Shop.Models;
 using _101Shop.Services.Contracts;
 using _101Shop.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-
 
 namespace _101Shop.Services
 {
@@ -30,7 +24,7 @@ namespace _101Shop.Services
             }
         }
 
-        public Cake Create(string name, string shortDesc, string longDesc, decimal price, string allergyInformation, string imageURL, bool isSpecial)
+        public async Task<Cake> Create(string name, string shortDesc, string longDesc, decimal price, string allergyInformation, string imageURL, bool isSpecial)
         {
             var cake = new Cake()
             {
@@ -43,41 +37,40 @@ namespace _101Shop.Services
                 IsSpecial = isSpecial,
                 Comments = new List<Comment>()
             };
-            _appDbContext.Cakes.Add(cake);
-            _appDbContext.SaveChanges();
+            await Task.Run(() => _appDbContext.Cakes.Add(cake));
+            await Task.Run(() => _appDbContext.SaveChanges());
+
             return cake;
         }
 
-        public Cake GetcakeById(int cakeId)
+        public async Task<Cake> GetcakeById(int cakeId)
         {
-            var cake = _appDbContext.Cakes.FirstOrDefault(cake => cake.CakeId == cakeId);
-            var comments = _appDbContext.Comments.Where(c => c.CakeId == cakeId).ToList();
-
+            var cake = await Task.Run(() => _appDbContext.Cakes.FirstOrDefault(cake => cake.CakeId == cakeId));
+            var comments = await Task.Run(() => _appDbContext.Comments.Where(c => c.CakeId == cakeId).ToList());
             cake.Comments = comments;
+
             return cake;
         }
 
-        public ICollection<Cake> GetAllCakes()
+        public async Task<ICollection<Cake>> GetAllCakes()
         {
-            var cakes = _appDbContext.Cakes.Where(x => !x.IsSpecial).ToList();
-            return cakes;
+            return await Task.Run(() => _appDbContext.Cakes.Where(x => !x.IsSpecial).ToList());
         }
-        public ICollection<Cake> GetAllSpecialCakes()
+        public async Task<ICollection<Cake>> GetAllSpecialCakes()
         {
-            var specialCakes = _appDbContext.Cakes.Where(x => x.IsSpecial).ToList();
-            return specialCakes;
+            return await Task.Run(() => _appDbContext.Cakes.Where(x => x.IsSpecial).ToList());
         }
 
-        public void RemoveCake(int cakeId)
+        public async Task RemoveCake(int cakeId)
         {
-            var removeCake = _appDbContext.Cakes.FirstOrDefault(x => x.CakeId == cakeId);
-            _appDbContext.Cakes.Remove(removeCake);
-            _appDbContext.SaveChanges();
+            var removeCake = await Task.Run(() => _appDbContext.Cakes.FirstOrDefault(x => x.CakeId == cakeId));
+            await Task.Run(() => _appDbContext.Cakes.Remove(removeCake));
+            await Task.Run(() => _appDbContext.SaveChanges());
         }
 
-        public void EditCake(CakeViewModel cake)
+        public async Task EditCake(CakeViewModel cake)
         {
-            var cakeToEdit = GetcakeById(cake.CakeId);
+            var cakeToEdit = await Task.Run(() => GetcakeById(cake.CakeId));
             cakeToEdit.Name = cake.Name;
             cakeToEdit.ShortDescription = cake.ShortDescription;
             cakeToEdit.LongDescription = cake.LongDescription;
@@ -86,20 +79,22 @@ namespace _101Shop.Services
             cakeToEdit.ImageUrl = cake.ImageUrl;
             cakeToEdit.IsSpecial = cake.IsSpecial;
 
-            _appDbContext.SaveChanges();
+            await Task.Run(() => _appDbContext.SaveChanges());
         }
 
-        public Comment AddComment(Comment comment)
+        public async Task<Comment> AddComment(Comment comment)
         {
-            _appDbContext.Comments.Add(comment);
+            await Task.Run(() => _appDbContext.Comments.Add(comment));
             _appDbContext.SaveChanges();
+
             return comment;
         }
 
-        public Comment GetComments(Comment comment)
+        public async Task<Comment> GetComments(Comment comment)
         {
-            _appDbContext.Comments.Add(comment);
-            _appDbContext.SaveChanges();
+            await Task.Run(() => _appDbContext.Comments.Add(comment));
+            await Task.Run(() => _appDbContext.SaveChanges());
+
             return comment;
         }
     }

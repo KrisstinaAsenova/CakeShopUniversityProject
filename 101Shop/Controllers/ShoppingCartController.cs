@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using _101Shop.Services;
+using _101Shop.Services.Contracts;
+using _101Shop.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using _101Shop.ViewModels;
-using _101Shop.Services.Contracts;
-using _101Shop.Services;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace _101Shop.Controllers
 {
@@ -22,25 +18,26 @@ namespace _101Shop.Controllers
             _shoppingCart = shoppingCart;
         }
 
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
-            var items = _shoppingCart.GetShoppingCartItems();
-            _shoppingCart.ShoppingCartItems = items;
+            var items = await Task.Run(() => _shoppingCart.GetShoppingCartItems());
+            await Task.Run(() => _shoppingCart.ShoppingCartItems = items);
 
+            var shoppingCardTot = await Task.Run(() => _shoppingCart.GetShoppingCartTotal());
             var shoppingCartViewModel = new ShoppingCartViewModel
             {
                 ShoppingCart = _shoppingCart,
-                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
+                ShoppingCartTotal = shoppingCardTot
             };
 
             return View(shoppingCartViewModel);
         }
 
-        public RedirectToActionResult AddToShoppingCart(int cakeId)
+        public async Task<RedirectToActionResult> AddToShoppingCart(int cakeId)
         {
-            var cake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
+            var cake = await Task.Run(() => _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId));
 
-            _shoppingCart.AddToCart(cake, 1);
+            await Task.Run(() => _shoppingCart.AddToCart(cake, 1));
 
             if (cake.IsSpecial)
             {
@@ -52,16 +49,16 @@ namespace _101Shop.Controllers
             }
         }
 
-        public RedirectToActionResult RemoveFromShoppingCart(int cakeId)
+        public async Task<RedirectToActionResult> RemoveFromShoppingCart(int cakeId)
         {
-            var selectedcake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
+            var selectedcake = await Task.Run(() =>  _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId));
 
             if (selectedcake != null)
             {
-                _shoppingCart.RemoveFromCart(selectedcake);
+                await Task.Run(() => _shoppingCart.RemoveFromCart(selectedcake));
             }
+
             return RedirectToAction("Index");
         }
-
     }
 }

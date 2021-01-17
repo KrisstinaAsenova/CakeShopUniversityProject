@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using _101Shop.Data;
+﻿using _101Shop.Data;
 using _101Shop.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace _101Shop.Services
 {
@@ -23,17 +23,15 @@ namespace _101Shop.Services
 
         public static ShoppingCart GetCart(IServiceProvider services)
         {
-
             var context = services.GetService<AppDbContext>();
-
             return new ShoppingCart(context);
         }
 
-        public void AddToCart(Cake cake, int amount)
+        public async Task AddToCart(Cake cake, int amount)
         {
             var shoppingCartItem =
-                    _appDbContext.ShoppingCartItems.SingleOrDefault(
-                        s => s.Cake.CakeId == cake.CakeId && s.ShoppingCartId == ShoppingCartId);
+                   await Task.Run(() => _appDbContext.ShoppingCartItems.SingleOrDefault(
+                        s => s.Cake.CakeId == cake.CakeId && s.ShoppingCartId == ShoppingCartId));
 
             if (shoppingCartItem == null)
             {
@@ -44,23 +42,23 @@ namespace _101Shop.Services
                     Amount = 1
                 };
 
-                _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
+                await Task.Run(() => _appDbContext.ShoppingCartItems.Add(shoppingCartItem));
             }
             else
             {
                 shoppingCartItem.Amount++;
             }
-            _appDbContext.SaveChanges();
+
+            await Task.Run(() => _appDbContext.SaveChanges());
         }
 
-        public int RemoveFromCart(Cake cake)
+        public async Task<int> RemoveFromCart(Cake cake)
         {
             var shoppingCartItem =
-                    _appDbContext.ShoppingCartItems.SingleOrDefault(
-                        s => s.Cake.CakeId == cake.CakeId && s.ShoppingCartId == ShoppingCartId);
+                    await Task.Run(() => _appDbContext.ShoppingCartItems.SingleOrDefault(
+                        s => s.Cake.CakeId == cake.CakeId && s.ShoppingCartId == ShoppingCartId));
 
             var localAmount = 0;
-
             if (shoppingCartItem != null)
             {
                 if (shoppingCartItem.Amount > 1)
@@ -70,42 +68,38 @@ namespace _101Shop.Services
                 }
                 else
                 {
-                    _appDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+                    await Task.Run(() => _appDbContext.ShoppingCartItems.Remove(shoppingCartItem));
                 }
             }
 
-            _appDbContext.SaveChanges();
-
+            await Task.Run(() => _appDbContext.SaveChanges());
             return localAmount;
         }
 
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public async Task<List<ShoppingCartItem>> GetShoppingCartItems()
         {
             return ShoppingCartItems ??
                    (ShoppingCartItems =
-                       _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+                       await Task.Run(() => _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                            .Include(s => s.Cake)
-                           .ToList());
+                           .ToList()));
         }
 
-        public void ClearCart()
+        public async Task ClearCart()
         {
-            var cartItems = _appDbContext
+            var cartItems = await Task.Run(() => _appDbContext
                 .ShoppingCartItems
-                .Where(cart => cart.ShoppingCartId == ShoppingCartId);
+                .Where(cart => cart.ShoppingCartId == ShoppingCartId));
 
-            _appDbContext.ShoppingCartItems.RemoveRange(cartItems);
-
-            _appDbContext.SaveChanges();
+            await Task.Run(() => _appDbContext.ShoppingCartItems.RemoveRange(cartItems));
+            await Task.Run(() => _appDbContext.SaveChanges());
         }
 
 
-
-        public decimal GetShoppingCartTotal()
+        public async Task<decimal> GetShoppingCartTotal()
         {
-            var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                .Select(c => c.Cake.Price * c.Amount).Sum();
-            return total;
+            return await Task.Run(() => _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Select(c => c.Cake.Price * c.Amount).Sum());
         }
     }
 }

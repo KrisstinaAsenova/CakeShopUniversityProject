@@ -22,40 +22,39 @@ namespace _101Shop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CakeViewModel vm)
+        public async Task<IActionResult> Create(CakeViewModel vm)
         {
-            var model = _cakeRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price, vm.AllergyInformation, vm.ImageUrl, vm.IsSpecial);
+            var model = await Task.Run(() => _cakeRepository.Create(vm.Name, vm.ShortDescription, vm.LongDescription, vm.Price, vm.AllergyInformation, vm.ImageUrl, vm.IsSpecial));
 
             return RedirectToAction(nameof(Create));
         }
 
         
         [HttpPost]
-        public IActionResult AddComment(CakeViewModel vm)
+        public async Task<IActionResult> AddComment(CakeViewModel vm)
         {
-            var user = _userManager.GetUserAsync(User);
             var comment = new Comment()
             {
                 CakeId = vm.CakeId,
-                UserName = user.Result.UserName,
+                UserName = _userManager.GetUserAsync(User).Result.UserName,
                 Text = vm.Text,
                 Date = DateTime.Now
             };
-            var model = _cakeRepository.AddComment(comment);
+            var model = await Task.Run(() => _cakeRepository.AddComment(comment));
 
             return RedirectToAction(nameof(Details), new { cakeId = vm.CakeId });
         }
 
-        public IActionResult Remove(int cakeId)
+        public async Task<IActionResult> Remove(int cakeId)
         {
-            var cake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId);
-            _cakeRepository.RemoveCake(cakeId);
+            var cake = await Task.Run(() => _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == cakeId));
+            await Task.Run(() => _cakeRepository.RemoveCake(cakeId));
 
             if (cake.IsSpecial)
             {
@@ -67,10 +66,10 @@ namespace _101Shop.Controllers
             }
         }
 
-        public IActionResult EditCake(CakeViewModel vm)
+        public async Task<IActionResult> EditCake(CakeViewModel vm)
         {
-            var cake = _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == vm.CakeId);
-            _cakeRepository.EditCake(vm);
+            var cake = await Task.Run(() => _cakeRepository.cakes.FirstOrDefault(p => p.CakeId == vm.CakeId));
+            await Task.Run(() => _cakeRepository.EditCake(vm));
 
             if (cake.IsSpecial)
             {
@@ -83,9 +82,9 @@ namespace _101Shop.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCake(int cakeId)
+        public async Task<IActionResult> GetCake(int cakeId)
         {
-            var cake=_cakeRepository.GetcakeById(cakeId);
+            var cake = await Task.Run(() => _cakeRepository.GetcakeById(cakeId));
             var cakeViewModelToEdit = new CakeViewModel
             {
                 CakeId = cake.CakeId,
@@ -98,12 +97,13 @@ namespace _101Shop.Controllers
                 IsSpecial = cake.IsSpecial
 
             };
+
             return View("EditCake",cakeViewModelToEdit);
         }
 
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            var cakes = _cakeRepository.GetAllCakes();
+            var cakes = await Task.Run(() => _cakeRepository.GetAllCakes());
             var test = cakes.Select(cake => new CakeViewModel
             {
                 CakeId = cake.CakeId,
@@ -114,11 +114,12 @@ namespace _101Shop.Controllers
                 ImageUrl = cake.ImageUrl
 
             });
+
             return View(test);
         }
-        public IActionResult Specials()
+        public async Task<IActionResult> Specials()
         {
-            var specialCakes = _cakeRepository.GetAllSpecialCakes();
+            var specialCakes = await Task.Run(() => _cakeRepository.GetAllSpecialCakes());
             var test = specialCakes.Select(cake => new CakeViewModel
             {
                 CakeId = cake.CakeId,
@@ -129,12 +130,13 @@ namespace _101Shop.Controllers
                 ImageUrl = cake.ImageUrl
 
             });
+
             return View(test);
         }
 
-        public IActionResult Details(int cakeId)
+        public async Task<IActionResult> Details(int cakeId)
         {
-            var cake = _cakeRepository.GetcakeById(cakeId);
+            var cake = await Task.Run(() => _cakeRepository.GetcakeById(cakeId));
             var test = new CakeViewModel()
             {
                 CakeId = cake.CakeId,
@@ -146,6 +148,7 @@ namespace _101Shop.Controllers
                 ImageUrl = cake.ImageUrl,
                 Comments = cake.Comments
             };
+
             return View(test);
         }
     }

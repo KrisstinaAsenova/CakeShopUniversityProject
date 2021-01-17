@@ -1,14 +1,11 @@
-﻿using System;
+﻿using _101Shop.Data;
+using _101Shop.Models;
+using _101Shop.Services.Contracts;
+using _101Shop.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using _101Shop.Models;
-using _101Shop.ViewModels;
-using _101Shop.Services.Contracts;
-using _101Shop.Data;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace _101Shop.Controllers
 {
@@ -25,11 +22,11 @@ namespace _101Shop.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<CakeViewModel> LoadMorecakes()
+        public async Task<IEnumerable<CakeViewModel>> LoadMorecakes()
         {
             IEnumerable<Cake> dbcakes = null;
 
-            dbcakes = _cakeRepository.cakes.OrderBy(p => p.CakeId).Take(10);
+            dbcakes = await Task.Run(() => _cakeRepository.cakes.OrderBy(p => p.CakeId).Take(10));
 
             List<CakeViewModel> cakes = new List<CakeViewModel>();
 
@@ -37,6 +34,7 @@ namespace _101Shop.Controllers
             {
                 cakes.Add(MapDbcakeTocakeViewModel(dbcake));
             }
+
             return cakes;
         }
 
