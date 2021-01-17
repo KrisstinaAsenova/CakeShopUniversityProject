@@ -12,8 +12,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using _101Shop.Models;
-//using BethanyscakeShop.Models;
 using Microsoft.AspNetCore.Http;
+using _101Shop.Services;
+using _101Shop.Services.Contracts;
+using _101Shop.Data;
 
 namespace _101Shop
 {

@@ -1,4 +1,7 @@
-﻿using _101Shop.ViewModels;
+﻿using _101Shop.Data;
+using _101Shop.Models;
+using _101Shop.Services.Contracts;
+using _101Shop.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
@@ -9,12 +12,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 
-namespace _101Shop.Models
+namespace _101Shop.Services
 {
-    public class CakeRepository: ICakeRepository
+    public class CakeRepository : ICakeRepository
     {
         private readonly AppDbContext _appDbContext;
-        public CakeRepository(AppDbContext appDbContext) 
+        public CakeRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
@@ -48,7 +51,7 @@ namespace _101Shop.Models
         public Cake GetcakeById(int cakeId)
         {
             var cake = _appDbContext.Cakes.FirstOrDefault(cake => cake.CakeId == cakeId);
-            var comments = _appDbContext.Comments.Where(c => c.CakeId == cakeId).ToList();   
+            var comments = _appDbContext.Comments.Where(c => c.CakeId == cakeId).ToList();
 
             cake.Comments = comments;
             return cake;
@@ -72,7 +75,8 @@ namespace _101Shop.Models
             _appDbContext.SaveChanges();
         }
 
-        public void EditCake(CakeViewModel cake) {
+        public void EditCake(CakeViewModel cake)
+        {
             var cakeToEdit = GetcakeById(cake.CakeId);
             cakeToEdit.Name = cake.Name;
             cakeToEdit.ShortDescription = cake.ShortDescription;

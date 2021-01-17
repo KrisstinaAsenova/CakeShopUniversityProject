@@ -1,10 +1,11 @@
-﻿using _101Shop.ViewModels;
+﻿using _101Shop.Models;
+using _101Shop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _101Shop.Models
+namespace _101Shop.Services.Contracts
 {
     public interface ICakeRepository
     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using _101Shop.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _101Shop.Models
+namespace _101Shop.Data
 {
     public static class DbInitializer
     {
@@ -56,8 +57,8 @@ namespace _101Shop.Models
 
             //builder.Entity<Category>().HasData(category1, category2, category3);
 
-           
-            
+
+
             var cake1 = new Cake
             {
                 CakeId = 1,
@@ -117,7 +118,7 @@ namespace _101Shop.Models
             var user = new User { Id = "123" };
             builder.Entity<User>().HasData(user);
 
-            
+
         }
     }
 }

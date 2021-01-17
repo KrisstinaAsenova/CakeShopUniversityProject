@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using _101Shop.Models;
 using _101Shop.ViewModels;
+using _101Shop.Services.Contracts;
+using _101Shop.Data;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
